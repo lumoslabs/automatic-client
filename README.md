@@ -19,6 +19,13 @@ Or install it yourself as:
 
 ## Usage
 
+The API will require an `OAuth` `access_token` to retrieve data. You
+will store this token in an `ENV` variable inside of the `.env` file:
+
+```
+AUTOMATIC_ACCESS_TOKEN='1234'
+```
+
 The planned interaction will look like:
 
 ### Console
