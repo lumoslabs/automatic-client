@@ -18,7 +18,7 @@ module Automatic
       end
 
       def user
-        # TODO: Return a User object
+        @user ||= Automatic::Client::User.new(user_params)
       end
 
       def end_location

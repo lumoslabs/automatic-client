@@ -18,6 +18,10 @@ describe Automatic::Client::Trip do
       it "returns a Vehicle object" do
         expect(subject.vehicle).to be_a(Automatic::Client::Vehicle)
       end
+
+      it "returns a User object" do
+        expect(subject.user).to be_a(Automatic::Client::User)
+      end
     end
 
     it "returns the #id" do
