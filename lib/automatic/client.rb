@@ -11,6 +11,7 @@ require "automatic/client/vehicle"
 require "automatic/client/users"
 require "automatic/client/user"
 
+require "automatic/client/locations"
 require "automatic/client/location"
 
 require "automatic/core_extension"
