@@ -48,5 +48,27 @@ describe Automatic::Client::Response::Link do
         expect(subject.previous?).to be_false
       end
     end
+
+    describe "#last?" do
+      it "returns true if this is a last link" do
+        attributes[:rel] = 'last'
+        expect(subject.last?).to be_true
+      end
+
+      it "returns false if this is not a last link" do
+        expect(subject.last?).to be_false
+      end
+    end
+
+    describe "#first?" do
+      it "returns true if this is a first link" do
+        attributes[:rel] = 'first'
+        expect(subject.first?).to be_true
+      end
+
+      it "returns false if this is not a first link" do
+        expect(subject.first?).to be_false
+      end
+    end
   end
 end

@@ -29,6 +29,20 @@ module Automatic
           'next' == self.rel
         end
 
+        # Helper method to see if this is a last? link for pagination
+        #
+        # @return [Boolean] Tru if it's a last Link
+        def last?
+          'last' == self.rel
+        end
+        #
+        # Helper method to see if this is a first? link for pagination
+        #
+        # @return [Boolean] Tru if it's a first Link
+        def first?
+          'first' == self.rel
+        end
+
         # Helper method to see if this is a previous? link for pagination
         #
         # @return [Boolean] True if it's a previous link
