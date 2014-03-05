@@ -53,6 +53,13 @@ module Automatic
         @attributes.fetch('start_time_zone', nil)
       end
 
+      # Return the elapsed time of the Trip in minutes
+      #
+      # @return [Float] Elapsed time of the trip
+      def elapsed_time
+        ((self.end_at - self.start_at) / 60)
+      end
+
       def path
         @attributes.fetch('path', nil)
       end

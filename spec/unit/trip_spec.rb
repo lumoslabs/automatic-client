@@ -66,6 +66,10 @@ describe Automatic::Client::Trip do
       expect(subject.start_time_zone).to eq('America/Los_Angeles')
     end
 
+    it "returns the #elapsed_time" do
+      expect(subject.elapsed_time).to eq(25.0)
+    end
+
     it "returns the #path encoded polyline" do
       expected = "{xoeFlkjjVmOhBsA_ToEir@gDch@sAgSi@cIi@qI~IgAn@w@DEKMMOCOAEeAyAcDqEwEmG]c@g@YuCyD@I@IpAiBlAaBpAkBcHuJeGiIgFeHgTyYWa@DG"
       expect(subject.path).to eq(expected)
