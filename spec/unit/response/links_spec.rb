@@ -42,4 +42,36 @@ describe Automatic::Client::Response::Links do
       expect(subject.any?).to be_true
     end
   end
+
+  describe "#previous" do
+    let(:collection) do
+      [
+        { uri: 'testing-prev.com', rel: 'previous' }
+      ]
+    end
+
+    it "returns the Previous link uri" do
+      expect(subject.previous.uri).to eq('testing-prev.com')
+    end
+
+    it "returns true for #previous?" do
+      expect(subject.previous?).to be_true
+    end
+  end
+
+  describe "#next" do
+    let(:collection) do
+      [
+        { uri: 'testing-next.com', rel: 'next' }
+      ]
+    end
+
+    it "returns the Next link uri" do
+      expect(subject.next.uri).to eq('testing-next.com')
+    end
+
+    it "returns true for #next?" do
+      expect(subject.next?).to be_true
+    end
+  end
 end

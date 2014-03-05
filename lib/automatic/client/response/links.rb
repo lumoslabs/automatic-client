@@ -12,6 +12,22 @@ module Automatic
           links_collection.each(&block)
         end
 
+        def previous
+          self.select(&:previous?).first
+        end
+
+        def previous?
+          !!self.previous
+        end
+
+        def next
+          self.select(&:next?).first
+        end
+
+        def next?
+          !!self.next
+        end
+
         private
         def links_collection
           @collection.map { |record| Link.new(record) }
