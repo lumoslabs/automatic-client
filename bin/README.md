@@ -1,12 +1,13 @@
 # Utilizing the Executables
 
-You can view your _trips_ on the command line. This will give you a
+You can view your _trips_ and _vehicles_ on the command line. This will give you a
 quick table view of your trips.
 
 ## Examples
 
 ```
 bundle exec bin/trips all
+bundle exec bin/vehicles all
 ```
 
 # TODO
