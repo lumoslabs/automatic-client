@@ -5,6 +5,7 @@ require "automatic/client/trips"
 require "automatic/client/trip"
 require "automatic/client/vehicle"
 require "automatic/client/user"
+require "automatic/client/location"
 
 require "automatic/core_extension"
 
