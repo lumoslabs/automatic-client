@@ -22,7 +22,7 @@ module Automatic
       end
 
       def end_location
-        # TODO: Return a Location object
+        @end_location ||= Automatic::Client::Location.new(end_location_params)
       end
 
       def end_time
@@ -38,7 +38,7 @@ module Automatic
       end
 
       def start_location
-        # TODO: Return a Location object
+        @start_location ||= Automatic::Client::Location.new(start_location_params)
       end
 
       def start_time

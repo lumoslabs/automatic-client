@@ -22,6 +22,14 @@ describe Automatic::Client::Trip do
       it "returns a User object" do
         expect(subject.user).to be_a(Automatic::Client::User)
       end
+
+      it "returns a Location object for #start_location" do
+        expect(subject.start_location).to be_a(Automatic::Client::Location)
+      end
+
+      it "returns a Location object for #end_location" do
+        expect(subject.end_location).to be_a(Automatic::Client::Location)
+      end
     end
 
     it "returns the #id" do
