@@ -7,9 +7,11 @@ module Automatic
         ::Time.at(self.to_i / 1000)
       end
 
-      def in_zone(timezone)
-        return nil if (timezone.nil? || timezone.empty?)
-
+      # Returns the time in the specififed Timezone. If none
+      # is provided it will use UTC
+      #
+      # @return [Time] The Time in the corresponding zone
+      def in_zone(timezone = 'UTC')
         zone_object = TZInfo::Timezone.get(timezone)
         time_period = zone_object.period_for_utc(self)
         (self + time_period.utc_offset)
