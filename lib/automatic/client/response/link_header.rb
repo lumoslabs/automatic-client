@@ -4,24 +4,33 @@ module Automatic
       class LinkHeader
         InvalidLinkHeaderError = Class.new(StandardError)
 
-        include Enumerable
-
+        # Parses the Link header and then returns an instance of Links wrapper
+        #
         def initialize(header=nil)
-          @header = header.to_s
+          @header       = header.to_s
+          @link_records = []
         end
 
-        def each(&block)
-          links_collection.each(&block)
+        # Returns a collection of links parsed from the String
+        #
+        # @return [Array, Links] A Links array Wrapper
+        def links
+          return @links if @links
+
+          extract!
+
+          @links ||= Automatic::Client::Response::Links.new(@link_records)
+        end
+
+        # Returns true if there are Links in the wrapper
+        #
+        # @return [Boolean] Returns true if there are any links
+        def links?
+          self.links.any?
         end
 
         private
-        def links_collection
-          @links_collection ||= extract!
-        end
-
         def extract!
-          links = []
-
           if @header
             parts = @header.split(',')
 
@@ -33,11 +42,11 @@ module Automatic
               url  = section[0].gsub(/<(.*)>/, '\1').strip
               rel  = section[1].gsub(/rel="(.*)"/, '\1').strip
 
-              links << Link.new(uri: url, rel: rel)
+              @link_records << { uri: url, rel: rel }
             end
           end
 
-          links
+          @link_records
         end
       end
     end
