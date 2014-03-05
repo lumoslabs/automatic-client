@@ -75,3 +75,8 @@ here](https://github.com/nateklaiber/automatic-client/tree/master/bin).
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+# TODO
+
+* Add Core Extension helpers for different data types
+* Add Serializers for all types (JSON, CSV, PDF)
