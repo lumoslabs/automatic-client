@@ -1,0 +1,2 @@
+module Automatic
+end
