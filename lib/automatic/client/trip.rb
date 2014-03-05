@@ -55,9 +55,13 @@ module Automatic
 
       # Return the elapsed time of the Trip in minutes
       #
+      # TODO: Take down to seconds and support (seconds, minutes, hours)
+      # TODO: Create a helper extension that will be smart and know seconds and minutes
+      #
       # @return [Float] Elapsed time of the trip
       def elapsed_time
-        ((self.end_at - self.start_at) / 60)
+        seconds = (self.end_at.to_i - self.start_at.to_i)
+        (seconds / 60)
       end
 
       def path
