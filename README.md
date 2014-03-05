@@ -25,8 +25,7 @@ The planned interaction will look like:
 
 ```ruby
 
-connection =
-Automatic::Client::Connection.new('https://api.automatic.com')
+connection = Automatic::Client::Connection.new('https://api.automatic.com')
 trips      = connection.trips
 
 # Iterate through the trips
