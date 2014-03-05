@@ -1,7 +1,7 @@
 # Utilizing the Executables
 
 You can view your _trips_ and _vehicles_ on the command line. This will give you a
-quick table view of your trips.
+quick table view.
 
 ## Examples
 

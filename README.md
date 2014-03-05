@@ -23,17 +23,16 @@ The API will require an `OAuth` `access_token` to retrieve data. You
 will store this token in an `ENV` variable inside of the `.env` file:
 
 ```
+API_HOST='https://api.automatic.com'
 AUTOMATIC_ACCESS_TOKEN='1234'
 ```
-
-The planned interaction will look like:
 
 ### Console
 
 ```ruby
+require 'automatic/client'
 
-connection = Automatic::Client::Connection.new('https://api.automatic.com')
-trips      = connection.trips
+trips = Automatic::Client::Trips.all
 
 # Iterate through the trips
 trips.each do |trip|
