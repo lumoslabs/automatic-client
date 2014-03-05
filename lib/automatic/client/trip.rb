@@ -14,7 +14,7 @@ module Automatic
       end
 
       def vehicle
-        # TODO: Return a Vehicle object
+        @vehicle ||= Automatic::Client::Vehicle.new(vehicle_params)
       end
 
       def user

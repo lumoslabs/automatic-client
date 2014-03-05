@@ -14,6 +14,12 @@ describe Automatic::Client::Trip do
   subject { described_class.new(attributes) }
 
   context "with all values" do
+    context "associations" do
+      it "returns a Vehicle object" do
+        expect(subject.vehicle).to be_a(Automatic::Client::Vehicle)
+      end
+    end
+
     it "returns the #id" do
       expect(subject.id).to eq('524da549e4b08d1af17f6dca')
     end
