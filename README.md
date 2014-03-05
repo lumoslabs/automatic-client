@@ -58,12 +58,15 @@ You can also use this data to get aggregate statistics as you see fit.
 
 ### Command Line
 
-```
-bin/trips # List all trips
-bin/trips --id '1234' # View a specific trip
-bin/vehicles # List all vehicles
-bin/vehicles --id '1234' # View a specific vehicle
-```
+You can also utilize a few CLI executable scripts that will allow you
+to:
+
+* View a table of the data
+* Export your trips to a CSV file
+
+You can [read more
+here](https://github.com/nateklaiber/automatic-client/tree/master/bin).
+
 
 ## Contributing
 
