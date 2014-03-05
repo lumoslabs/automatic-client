@@ -21,7 +21,7 @@ module Automatic
 
       private
       def vehicles_collection
-        @collection
+        @collection.map { |record| Trip.new(record) }
       end
     end
   end
