@@ -28,6 +28,22 @@ module Automatic
           !!self.next
         end
 
+        def last_page
+          self.select(&:last?).first
+        end
+
+        def last_page?
+          !!self.last_page
+        end
+
+        def first_page
+          self.select(&:first?).first
+        end
+
+        def first_page?
+          !!self.first_page
+        end
+
         private
         def links_collection
           @collection.map { |record| Link.new(record) }

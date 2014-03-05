@@ -74,4 +74,36 @@ describe Automatic::Client::Response::Links do
       expect(subject.next?).to be_true
     end
   end
+
+  describe "#first_page" do
+    let(:collection) do
+      [
+        { uri: 'testing-first-page.com', rel: 'first' }
+      ]
+    end
+
+    it "returns the First link uri" do
+      expect(subject.first_page.uri).to eq('testing-first-page.com')
+    end
+
+    it "returns true for #first_page?" do
+      expect(subject.first_page?).to be_true
+    end
+  end
+
+  describe "#last_page" do
+    let(:collection) do
+      [
+        { uri: 'testing-last-page.com', rel: 'last' }
+      ]
+    end
+
+    it "returns the Last link uri" do
+      expect(subject.last_page.uri).to eq('testing-last-page.com')
+    end
+
+    it "returns true for #last_page?" do
+      expect(subject.last_page?).to be_true
+    end
+  end
 end
