@@ -1,7 +1,7 @@
 require 'multi_json'
 
 require "automatic/client/version"
-require "automatic/client/vehicles"
+require "automatic/client/trips"
 
 module Automatic
   module Client
