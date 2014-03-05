@@ -11,7 +11,9 @@ module Automatic
       # is provided it will use UTC
       #
       # @return [Time] The Time in the corresponding zone
-      def in_zone(timezone = 'UTC')
+      def in_zone(timezone=nil)
+        timezone = if (timezone.nil? || timezone.empty?) then 'UTC' else timezone end
+
         zone_object = TZInfo::Timezone.get(timezone)
         time_period = zone_object.period_for_utc(self)
         (self + time_period.utc_offset)
