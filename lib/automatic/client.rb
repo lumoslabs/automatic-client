@@ -1,6 +1,11 @@
 require 'multi_json'
 
+require 'dotenv'
+Dotenv.load
+
 require "automatic/client/version"
+require "automatic/client/request"
+require "automatic/client/error"
 
 require "automatic/client/trips"
 require "automatic/client/trip"
