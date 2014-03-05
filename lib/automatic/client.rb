@@ -8,6 +8,7 @@ require "automatic/client/trip"
 require "automatic/client/vehicles"
 require "automatic/client/vehicle"
 
+require "automatic/client/users"
 require "automatic/client/user"
 
 require "automatic/client/location"
