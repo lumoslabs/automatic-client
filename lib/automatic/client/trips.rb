@@ -14,6 +14,24 @@ module Automatic
         @collection = Array(collection)
       end
 
+      def self.find_by_id(id, options={})
+        route = Automatic::Client.routes.route_for('trip')
+
+        request   = Automatic::Client::Request.get(route.url_for(id: id), options)
+        response  = request
+        json_body = MultiJson.load(response.body)
+
+        case(response.status)
+        when 200
+          Automatic::Client::Trip.new(json_body)
+        else
+          json_body.merge!('status' => response.status)
+          error = Automatic::Client::Error.new(json_body)
+
+          raise StandardError.new(error.full_message)
+        end
+      end
+
       # Make a connection to Automatic to retrieve all trips. By default
       # we will stream until we have all trips. You can set `per_page` and `page` in the request.
       #
