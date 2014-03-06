@@ -1,5 +1,7 @@
 module Automatic
   class Routes
+    InvalidRouteError = Class.new(StandardError)
+
     # Create a new instance of a Route collection. This
     # allows us to keep all endpoints in a single object and
     # then later retrieve them by name.
@@ -19,7 +21,8 @@ module Automatic
     #
     # @return [Array] Routes collection
     def add_route(route)
-      @routes << route
+      raise InvalidRouteError.new('Route must respond to #url_for') unless route.respond_to?(:url_for)
+      @routes << route unless route_exists?(route)
     end
 
     # Returns the route by name
@@ -42,6 +45,11 @@ module Automatic
     # @return [Boolean] True if routes exist
     def routes?
       @routes.any?
+    end
+
+    private
+    def route_exists?(route)
+      !!self.route_for(route.name)
     end
   end
 end
