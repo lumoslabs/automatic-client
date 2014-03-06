@@ -73,7 +73,7 @@ The supported endpoints are stored in `Automatic::Client.routes`. This
 allows you to view all endpoints and generate a `url_for` the given
 route. Routes are comprised of either a `uri_template` or full path.
 
-```
+```ruby
 require 'automatic/client'
 => true
 
