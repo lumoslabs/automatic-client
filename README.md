@@ -67,6 +67,22 @@ to:
 You can [read more
 here](https://github.com/nateklaiber/automatic-client/tree/master/bin).
 
+## Routes
+
+The supported endpoints are stored in `Automatic::Client.routes`. This
+allows you to view all endpoints and generate a `url_for` the given
+route. Routes are comprised of either a `uri_template` or full path.
+
+```
+require 'automatic/client'
+=> true
+
+Automatic::Client.routes.route_for('trips').url_for
+=> "https://api.automatic.com/v1/trips"
+
+Automatic::Client.routes.route_for('trips').url_for(page: 1, per_page: 50)
+=> "https://api.automatic.com/v1/trips?page=1&per_page=50"
+```
 
 ## Contributing
 
