@@ -1,5 +1,7 @@
 # Automatic Link Client
 
+[![Build Status](https://travis-ci.org/nateklaiber/automatic-client.png)](https://travis-ci.org/nateklaiber/automatic-client)
+
 A wrapper to consume the [Automatic
 API](https://www.automatic.com/developer/documentation/). 
 
