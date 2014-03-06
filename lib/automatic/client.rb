@@ -35,9 +35,9 @@ module Automatic
 
     def self.routes
       routes = Automatic::Routes.new
-      routes.add_route(Automatic::Route.new('trips', 'https://api.automatic.com/v1/trips'))
+      routes.add_route(Automatic::Route.new('trips', 'https://api.automatic.com/v1/trips{?page,per_page}', templated: true))
       routes.add_route(Automatic::Route.new('trip', 'https://api.automatic.com/v1/trip/{id}', templated: true))
-      routes.add_route(Automatic::Route.new('vehicles', 'https://api.automatic.com/v1/vehicles'))
+      routes.add_route(Automatic::Route.new('vehicles', 'https://api.automatic.com/v1/vehicles{?page,per_page}', templated: true))
       routes.add_route(Automatic::Route.new('vehicle', 'https://api.automatic.com/v1/vehicle/{id}', templated: true))
       routes
     end
