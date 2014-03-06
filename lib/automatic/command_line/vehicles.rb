@@ -7,15 +7,10 @@ module Automatic
   module CommandLine
     class Vehicles < Thor
       desc 'all', 'List all Automatic Vehicles'
-      option :id, type: :string, banner: 'VEHICLE_ID'
       def all
         puts "\n"
 
-        vehicles = if options[:id]
-          [Automatic::Client::Vehicles.find_by_id(options[:id])]
-        else
-          Automatic::Client::Vehicles.all
-        end
+        vehicles = Automatic::Client::Vehicles.all
 
         if vehicles.any?
           vehicle_row = ->(index,record) do
