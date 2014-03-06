@@ -7,6 +7,26 @@ module Automatic
         @collection = Array(collection)
       end
 
+      def self.find_by_id(id, options={})
+        id = id.to_s
+
+        route = Automatic::Client.routes.route_for('vehicle')
+
+        request   = Automatic::Client::Request.get(route.url_for(id: id), options)
+        response  = request
+        json_body = MultiJson.load(response.body)
+
+        case(response.status)
+        when 200
+          Automatic::Client::Vehicle.new(json_body)
+        else
+          json_body.merge!('status' => response.status)
+          error = Automatic::Client::Error.new(json_body)
+
+          raise StandardError.new(error.full_message)
+        end
+      end
+
       def self.all(options={})
         route = Automatic::Client.routes.route_for('vehicles')
 
