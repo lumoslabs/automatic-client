@@ -8,7 +8,9 @@ module Automatic
       end
 
       def self.all(options={})
-        request   = Automatic::Client::Request.get('/v1/vehicles', options)
+        route = Automatic::Client.routes.route_for('vehicles')
+
+        request   = Automatic::Client::Request.get(route.url_for, options)
         response  = request
         json_body = MultiJson.load(response.body)
 

@@ -21,7 +21,9 @@ module Automatic
       #
       # @return [Array, Trips] Array of trip records
       def self.all(options={})
-        request   = Automatic::Client::Request.get('/v1/trips', options)
+        route = Automatic::Client.routes.route_for('trips')
+
+        request   = Automatic::Client::Request.get(route.url_for, options)
         response  = request
         json_body = MultiJson.load(response.body)
 
