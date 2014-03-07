@@ -38,7 +38,7 @@ trips = Automatic::Client::Trips.all
 
 # Iterate through the trips
 trips.each do |trip|
-  puts trip.user.name
+  puts trip.user.id
   puts trip.vehicle.display_name
 
   puts trip.start_location.name
@@ -73,7 +73,8 @@ here](https://github.com/nateklaiber/automatic-client/tree/master/bin).
 
 The supported endpoints are stored in `Automatic::Client.routes`. This
 allows you to view all endpoints and generate a `url_for` the given
-route. Routes are comprised of either a `uri_template` or full path.
+route. Routes are comprised of either a [__Uri
+Template__](http://tools.ietf.org/html/rfc6570) or full path.
 
 ```ruby
 require 'automatic/client'
