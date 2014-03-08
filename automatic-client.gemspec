@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency("thor")
   spec.add_dependency("faraday")
+  spec.add_dependency("faraday_middleware")
   spec.add_dependency("multi_json")
   spec.add_dependency("terminal-table")
   spec.add_dependency("tzinfo")

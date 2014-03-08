@@ -1,4 +1,4 @@
-require 'faraday'
+require 'faraday_middleware'
 
 module Automatic
   module Client
@@ -17,6 +17,7 @@ module Automatic
       # @return [Faraday::Response] The full Response body
       def self.get(uri, options={})
         connection = Faraday.new(self.api_host) do |c|
+          c.use(FaradayMiddleware::FollowRedirects)
           c.adapter(Faraday.default_adapter) # NOTE: Use Typhoeus
         end
 
