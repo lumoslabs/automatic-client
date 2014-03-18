@@ -64,8 +64,19 @@ module Automatic
         (seconds / 60)
       end
 
+      # This returns the Endcoded Polyline path.
+      #
+      # @return [String] Encoded polyline
       def path
         @attributes.fetch('path', nil)
+      end
+
+      # This returns an association to the Polyline proxy that
+      # can encode and decode the details.
+      #
+      # @return [Polyline] The Polyline object
+      def polyline
+        @polyline ||= Automatic::Client::Polyline.new(self.path)
       end
 
       def distance_in_miles

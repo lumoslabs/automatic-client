@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency("tzinfo")
   spec.add_dependency("dotenv")
   spec.add_dependency("addressable")
+  spec.add_dependency("polylines")
 end

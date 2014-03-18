@@ -13,6 +13,8 @@ require "automatic/client/error"
 
 require "automatic/client/response"
 
+require "automatic/client/polyline"
+
 require "automatic/client/trips"
 require "automatic/client/trip"
 

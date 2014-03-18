@@ -30,6 +30,10 @@ describe Automatic::Client::Trip do
       it "returns a Location object for #end_location" do
         expect(subject.end_location).to be_a(Automatic::Client::Location)
       end
+
+      it "returns a Polyline object for #polyline" do
+        expect(subject.polyline).to be_a(Automatic::Client::Polyline)
+      end
     end
 
     it "returns the #id" do
