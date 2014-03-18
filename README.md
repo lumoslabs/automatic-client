@@ -58,7 +58,7 @@ end
 
 You can also use this data to get aggregate statistics as you see fit.
 
-## Polylines
+#### Polylines
 Automatic will provide an [_encoded
 polyline_](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
 with the `path` attribute. This gets wrapped around the
@@ -106,6 +106,17 @@ Automatic::Client.routes.route_for('trips').url_for
 
 Automatic::Client.routes.route_for('trips').url_for(page: 1, per_page: 50)
 => "https://api.automatic.com/v1/trips?page=1&per_page=50"
+
+Automatic::Client.routes.route_for('trips').url_for(page: 1, per_page: 50)
+=> "https://api.automatic.com/v1/trips?page=1&per_page=50"
+
+# Retrieve the URI Template for a single trip route
+trip_route = Automatic::Client.routes.route_for('trip')
+# => #<Automatic::Route:0x007f985cb7b280 @name="trip", @path="https://api.automatic.com/v1/trips/{id}", @options={:templated=>true}>
+
+# Specify the ID for the single trip route
+trip_route.url_for(id: '1234')
+# => "https://api.automatic.com/v1/trips/1234"
 ```
 
 ## Contributing
