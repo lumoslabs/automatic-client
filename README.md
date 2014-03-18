@@ -74,7 +74,7 @@ trip = Automatic::Client::Trips.find_by_id('trip-id')
 trip.polyline
 # => #<Automatic::Client::Polyline:0x007fa36aa399f8 ...>
 
-# Return the array of latitude and longitude paris
+# Return the array of latitude and longitude parts
 trip.polyline.decoded
 #=> [[20,-400]]
 ```
