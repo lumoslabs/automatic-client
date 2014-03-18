@@ -98,17 +98,16 @@ route. Routes are comprised of either a [__Uri
 Template__](http://tools.ietf.org/html/rfc6570) or full path.
 
 ```ruby
-require 'automatic/client'
-=> true
+require 'automatic'
+# => true
 
+# Get the URL for a templated URL with optional params
 Automatic::Client.routes.route_for('trips').url_for
-=> "https://api.automatic.com/v1/trips"
+# => "https://api.automatic.com/v1/trips"
 
+# Add optional parameters to expand into the URL
 Automatic::Client.routes.route_for('trips').url_for(page: 1, per_page: 50)
-=> "https://api.automatic.com/v1/trips?page=1&per_page=50"
-
-Automatic::Client.routes.route_for('trips').url_for(page: 1, per_page: 50)
-=> "https://api.automatic.com/v1/trips?page=1&per_page=50"
+# => "https://api.automatic.com/v1/trips?page=1&per_page=50"
 
 # Retrieve the URI Template for a single trip route
 trip_route = Automatic::Client.routes.route_for('trip')
