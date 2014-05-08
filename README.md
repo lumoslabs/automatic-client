@@ -130,3 +130,4 @@ trip_route.url_for(id: '1234')
 
 * Add Core Extension helpers for different data types
 * Add Serializers for all types (JSON, CSV, PDF)
+* Extract **configuration** into it's own object. This will allow for _class_ and _instance_ level configurations for things like **scopes**, **access_token**, **api_host**, etc. This is currently handled with global `ENV` vars.
