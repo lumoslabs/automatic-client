@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency("dotenv")
   spec.add_dependency("addressable")
   spec.add_dependency("polylines")
+  spec.add_dependency("restless_router")
 end

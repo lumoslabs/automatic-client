@@ -1,12 +1,11 @@
 require 'multi_json'
 
+require 'restless_router'
+
 require 'dotenv'
 Dotenv.load
 
 require "automatic/client/version"
-
-require "automatic/routes"
-require "automatic/route"
 
 require "automatic/client/request"
 require "automatic/client/error"
@@ -36,11 +35,11 @@ module Automatic
     end
 
     def self.routes
-      routes = Automatic::Routes.new
-      routes.add_route(Automatic::Route.new('trips', 'https://api.automatic.com/v1/trips/{?page,per_page}', templated: true))
-      routes.add_route(Automatic::Route.new('trip', 'https://api.automatic.com/v1/trips/{id}', templated: true))
-      routes.add_route(Automatic::Route.new('vehicles', 'https://api.automatic.com/v1/vehicles/{?page,per_page}', templated: true))
-      routes.add_route(Automatic::Route.new('vehicle', 'https://api.automatic.com/v1/vehicles/{id}', templated: true))
+      routes = RestlessRouter::Routes.new
+      routes.add_route(RestlessRouter::Route.new('trips', 'https://api.automatic.com/v1/trips/{?page,per_page}', templated: true))
+      routes.add_route(RestlessRouter::Route.new('trip', 'https://api.automatic.com/v1/trips/{id}', templated: true))
+      routes.add_route(RestlessRouter::Route.new('vehicles', 'https://api.automatic.com/v1/vehicles/{?page,per_page}', templated: true))
+      routes.add_route(RestlessRouter::Route.new('vehicle', 'https://api.automatic.com/v1/vehicles/{id}', templated: true))
       routes
     end
   end
