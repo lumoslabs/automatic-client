@@ -111,7 +111,7 @@ Automatic::Client.routes.route_for('trips').url_for(page: 1, per_page: 50)
 
 # Retrieve the URI Template for a single trip route
 trip_route = Automatic::Client.routes.route_for('trip')
-# => #<Automatic::Route:0x007f985cb7b280 @name="trip", @path="https://api.automatic.com/v1/trips/{id}", @options={:templated=>true}>
+# => #<RestlessRouter::Route:0x007f985cb7b280 @name="trip", @path="https://api.automatic.com/v1/trips/{id}", @options={:templated=>true}>
 
 # Specify the ID for the single trip route
 trip_route.url_for(id: '1234')
