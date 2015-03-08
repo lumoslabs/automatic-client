@@ -40,6 +40,11 @@ module Automatic
         end
       end
 
+      def self.mode
+        # TODO: This will return either `Development' or 'Production' mode depending
+        # on the ENV or Configuration.
+      end
+
       # This retrieves the value of the Access Token variable.
       #
       # @raise [MissingAccessTokenError] If the key can't be found
