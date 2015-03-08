@@ -14,14 +14,6 @@ describe Automatic::Client::Location do
   subject { described_class.new(attributes) }
 
   context "with all values" do
-    it "returns the #name" do
-      expect(subject.name).to eq('Ashbury St, SF, CA')
-    end
-
-    it "returns true for #name?" do
-      expect(subject.name?).to be_true
-    end
-
     it "returns the #lat" do
       expect(subject.lat).to eq(37.7692903)
     end
