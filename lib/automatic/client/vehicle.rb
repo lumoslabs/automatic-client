@@ -9,8 +9,8 @@ module Automatic
         @attributes.fetch('id', nil)
       end
 
-      def uri
-        @attributes.fetch('uri', nil)
+      def url
+        @attributes.fetch('url', nil)
       end
 
       def year
@@ -25,8 +25,16 @@ module Automatic
         @attributes.fetch('model', nil)
       end
 
+      def sub_model
+        @attributes.fetch('submodel', nil)
+      end
+
       def color
         @attributes.fetch('color', nil)
+      end
+
+      def full_name
+        [self.year, self.make, self.model, self.sub_model].join(' ')
       end
 
       def display_name
