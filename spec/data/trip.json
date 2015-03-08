@@ -1,41 +1,51 @@
 {
-  "uri": "https://api.automatic.com/v1/trips/524da549e4b08d1af17f6dca",
-  "id": "524da549e4b08d1af17f6dca",
-  "user": {
-    "id": "6sQPMSEW71FQ3H"
-  },
-  "vehicle": {
-    "id": "529e5772e4b00a2ddb562f1f",
-    "year": 2001,
-    "make": "Acura",
-    "model": "MDX",
-    "color": "purple",
-    "display_name": "My Speed Demon"
-  },
+  "url": "https://api.automatic.com/trip/T_524da549e4b08d1af17f6dca/",
+  "id": "T_524da549e4b08d1af17f6dca",
+  "user": "https://api.automatic.com/user/U_346534245654/",
+  "vehicle": "https://api.automatic.com/vehicle/C_3243445654645/",
+  "started_at": "2015-03-08T13:54:25.871000Z",
+  "start_timezone": "America/Los_Angeles",
+  "ended_at": "2015-03-08T14:22:40.089000Z",
+  "end_timezone": "America/Los_Angeles",
   "start_location": {
-    "name": "Ashbury St, SF, CA",
     "lat": 37.7692903,
     "lon": -122.4465469,
     "accuracy_m": 5
   },
-  "start_time": 1383448450201,
-  "start_time_zone": "America/Los_Angeles",
+  "start_address": {
+    "name": "1234 South Street",
+    "display_name": "1234 South Street, Somewhere, CA",
+    "street_number": "1234",
+    "street_name": "South Street",
+    "state": "CA",
+    "city": "Somewhere",
+    "country": "US"
+  },
   "end_location": {
-    "name": "5th St, SF, CA",
     "lat": 37.78270046281092,
     "lon": -122.4064556183999,
     "accuracy_m": 97.88124084472656
   },
-  "end_time": 1383449950201,
-  "end_time_zone": "America/Los_Angeles",
+  "end_address": {
+    "name": "1234 North Street",
+    "display_name": "1234 North Street, Somewhere, CA",
+    "street_number": "1234",
+    "street_name": "North Street",
+    "state": "CA",
+    "city": "Somewhere",
+    "country": "US"
+  },
   "path": "{xoeFlkjjVmOhBsA_ToEir@gDch@sAgSi@cIi@qI~IgAn@w@DEKMMOCOAEeAyAcDqEwEmG]c@g@YuCyD@I@IpAiBlAaBpAkBcHuJeGiIgFeHgTyYWa@DG",
   "distance_m": 6573.416666666661,
+  "duration_s": 1694.2,
   "hard_accels": 0,
   "hard_brakes": 1,
   "duration_over_80_s": 0,
   "duration_over_75_s": 2,
   "duration_over_70_s": 3,
+  "score": 44,
+  "vehicle_events": [],
   "fuel_cost_usd": 1.0428111627932486,
-  "fuel_volume_gal": 0.2465857561582522,
-  "average_mpg": 16.56434586845349
+  "fuel_volume_l": 0.2465857561582522,
+  "average_kmpl": 16.56434586845349
 }
