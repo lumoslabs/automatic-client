@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("faraday_middleware")
   spec.add_dependency("multi_json")
   spec.add_dependency("terminal-table")
+  spec.add_dependency("ruby-progressbar")
   spec.add_dependency("tzinfo")
   spec.add_dependency("dotenv")
   spec.add_dependency("addressable")
