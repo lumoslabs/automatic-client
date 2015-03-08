@@ -41,17 +41,18 @@ module Automatic
       def all
         puts "\n"
 
-        trips = Automatic::Client::Trips.all
+        trips = Automatic::Client::Trips.all(per_page: 25)
 
         if trips.any?
-          date_format = "%B %d %Y @ %I:%M%P"
+          date_format = "%B %d %Y @ %I:%M %P"
 
           trip_row = ->(index,record) do
-            [index, record.id, record.start_location.name, record.end_location.name, record.start_at.strftime(date_format), record.end_at.strftime(date_format), ("%.2f" % [record.elapsed_time]), ("%.2f" % [record.average_mpg]), ("%.2f" % [record.fuel_cost]), ("%.2f" % [record.distance_in_miles])]
+            duration = Automatic::Utilities::DurationCalculator.new(record.duration)
+            [index, record.id, record.start_address.display_name, record.end_address.display_name, record.start_at.strftime(date_format), record.end_at.strftime(date_format), duration.to_s, ("%.2f" % [record.average_mpg]), ("%.2f" % [record.fuel_cost]), ("%.2f" % [record.distance_in_miles])]
           end
 
           title    = "Automatic Trips"
-          headings = ['#', 'ID', 'Start Location', 'End Location', 'Start Time', 'End Time', 'Duration (Minutes)', 'Average MPG', 'Fuel Cost', 'Distance (Miles)']
+          headings = ['#', 'ID', 'Start Address', 'End Address', 'Start Time', 'End Time', 'Duration', 'Average MPG', 'Fuel Cost', 'Distance (Miles)']
           rows     = trips.each_with_index.map { |record, index| trip_row.call((index + 1), record) }
           table    = Terminal::Table.new(title: title, headings: headings, rows: rows)
 
