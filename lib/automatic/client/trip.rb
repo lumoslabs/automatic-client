@@ -25,6 +25,10 @@ module Automatic
         @end_location ||= Automatic::Client::Location.new(end_location_params)
       end
 
+      def end_address
+        @end_address ||= Automatic::Client::Address.new(end_address_params)
+      end
+
       def end_at
         end_time_before_zone.extend(Automatic::CoreExtension::Time).in_zone(self.end_time_zone)
       end
@@ -35,6 +39,10 @@ module Automatic
 
       def start_location
         @start_location ||= Automatic::Client::Location.new(start_location_params)
+      end
+
+      def start_address
+        @start_address ||= Automatic::Client::Address.new(start_address_params)
       end
 
       def start_at
@@ -147,6 +155,14 @@ module Automatic
 
       def user_params
         @attributes.fetch('user', {})
+      end
+
+      def start_address_params
+        @attributes.fetch('start_address', {})
+      end
+
+      def end_address_params
+        @attributes.fetch('end_addres', {})
       end
 
       def start_location_params

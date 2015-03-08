@@ -23,6 +23,14 @@ describe Automatic::Client::Trip do
         expect(subject.end_location).to be_a(Automatic::Client::Location)
       end
 
+      it "returns an Address object for #start_address" do
+        expect(subject.start_address).to be_a(Automatic::Client::Address)
+      end
+
+      it "returns an Address object for #end_address" do
+        expect(subject.start_address).to be_a(Automatic::Client::Address)
+      end
+
       it "returns a Polyline object for #polyline" do
         expect(subject.polyline).to be_a(Automatic::Client::Polyline)
       end
