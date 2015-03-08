@@ -26,6 +26,8 @@ require "automatic/client/user"
 require "automatic/client/locations"
 require "automatic/client/location"
 
+require "automatic/client/address"
+
 require "automatic/core_extension"
 
 module Automatic
