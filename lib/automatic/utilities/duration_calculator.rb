@@ -18,7 +18,11 @@ module Automatic
       end
 
       def hours?
-        self.hours > 0
+        if self.hours == 0 && (self.days?)
+          true
+        else
+          self.hours > 0
+        end
       end
 
       def minutes
@@ -26,7 +30,11 @@ module Automatic
       end
 
       def minutes?
-        self.minutes > 0
+        if self.minutes == 0 && (self.hours? || self.days?)
+          true
+        else
+          self.minutes > 0
+        end
       end
 
       def seconds
@@ -50,6 +58,10 @@ module Automatic
 
         if self.minutes?
           str << [("%s minutes" % [self.minutes])]
+        end
+
+        if self.seconds? && !self.minutes?
+          str << [("%s seconds" % [self.seconds])]
         end
 
         str.join(' ')
