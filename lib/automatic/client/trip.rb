@@ -9,24 +9,20 @@ module Automatic
         @attributes.fetch('id', nil)
       end
 
-      def uri
-        @attributes.fetch('uri', nil)
+      def url
+        @attributes.fetch('url', nil)
       end
 
       def vehicle
-        @vehicle ||= Automatic::Client::Vehicle.new(vehicle_params)
+        @attributes.fetch('vehicle', nil)
       end
 
       def user
-        @user ||= Automatic::Client::User.new(user_params)
+        @attributes.fetch('user', nil)
       end
 
       def end_location
         @end_location ||= Automatic::Client::Location.new(end_location_params)
-      end
-
-      def end_time
-        @attributes.fetch('end_time', nil)
       end
 
       def end_at
@@ -34,23 +30,19 @@ module Automatic
       end
 
       def end_time_zone
-        @attributes.fetch('end_time_zone', nil)
+        @attributes.fetch('end_timezone', nil)
       end
 
       def start_location
         @start_location ||= Automatic::Client::Location.new(start_location_params)
       end
 
-      def start_time
-        @attributes.fetch('start_time', nil)
-      end
-
       def start_at
-        start_time_before_zone.extend(Automatic::CoreExtension::Time).in_zone(self.end_time_zone)
+        start_time_before_zone.extend(Automatic::CoreExtension::Time).in_zone(self.start_time_zone)
       end
 
       def start_time_zone
-        @attributes.fetch('start_time_zone', nil)
+        @attributes.fetch('start_timezone', nil)
       end
 
       # Return the elapsed time of the Trip in minutes
@@ -59,10 +51,10 @@ module Automatic
       # TODO: Create a helper extension that will be smart and know seconds and minutes
       #
       # @return [Float] Elapsed time of the trip
-      def elapsed_time
-        seconds = (self.end_at.to_i - self.start_at.to_i)
-        (seconds / 60)
+      def duration
+        @attributes.fetch('duration_s', 0).to_f
       end
+      alias :elapsed_time :duration
 
       # This returns the Endcoded Polyline path.
       #
@@ -111,18 +103,41 @@ module Automatic
       end
       alias :duration_over_70 :duration_over_70_s
 
+      def score
+        @attributes.fetch('score', 0).to_i
+      end
+
       def fuel_cost_usd
         @attributes.fetch('fuel_cost_usd', 0)
       end
       alias :fuel_cost :fuel_cost_usd
 
+      def fuel_volume_l
+        @attributes.fetch('fuel_volume_l', 0).to_f
+      end
+
       def fuel_volume_gal
-        @attributes.fetch('fuel_volume_gal', 0)
+        (self.fuel_volume_l * 0.264172).to_f
       end
       alias :fuel_volume :fuel_volume_gal
 
+      def average_kmpl
+        @attributes.fetch('average_kmpl', 0).to_f
+      end
+
       def average_mpg
-        @attributes.fetch('average_mpg', 0)
+        val = self.average_kmpl
+        val = (val * 2.35214583)
+        ("%.1f" % [val]).to_f
+      end
+
+      # TODO: Return a Polymorphic Events Object
+      def events
+        @attributes.fetch('vehicle_events', [])
+      end
+
+      def events?
+        self.events.any?
       end
 
       private
@@ -143,11 +158,19 @@ module Automatic
       end
 
       def start_time_before_zone
-        self.start_time.to_s.extend(Automatic::CoreExtension::Time).from_milliseconds
+        begin
+          Time.parse(@attributes.fetch('started_at'))
+        rescue
+          nil
+        end
       end
 
       def end_time_before_zone
-        self.end_time.to_s.extend(Automatic::CoreExtension::Time).from_milliseconds
+        begin
+          Time.parse(@attributes.fetch('ended_at'))
+        rescue
+          nil
+        end
       end
     end
   end

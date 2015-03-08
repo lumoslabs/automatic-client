@@ -15,14 +15,6 @@ describe Automatic::Client::Trip do
 
   context "with all values" do
     context "associations" do
-      it "returns a Vehicle object" do
-        expect(subject.vehicle).to be_a(Automatic::Client::Vehicle)
-      end
-
-      it "returns a User object" do
-        expect(subject.user).to be_a(Automatic::Client::User)
-      end
-
       it "returns a Location object for #start_location" do
         expect(subject.start_location).to be_a(Automatic::Client::Location)
       end
@@ -37,41 +29,45 @@ describe Automatic::Client::Trip do
     end
 
     it "returns the #id" do
-      expect(subject.id).to eq('524da549e4b08d1af17f6dca')
+      expect(subject.id).to eq('T_524da549e4b08d1af17f6dca')
     end
 
-    it "returns the #uri" do
-      expect(subject.uri).to eq('https://api.automatic.com/v1/trips/524da549e4b08d1af17f6dca')
+    it "returns the URL for the #vehicle" do
+      expect(subject.vehicle).to eq("https://api.automatic.com/vehicle/C_3243445654645/")
     end
 
-    it "returns the #end_time in milliseconds" do
-      expect(subject.end_time).to eq(1383449950201)
+    it "returns the URL for the #user" do
+      expect(subject.user).to eq("https://api.automatic.com/user/U_346534245654/")
+    end
+
+    it "returns the #url" do
+      expect(subject.url).to eq('https://api.automatic.com/trip/T_524da549e4b08d1af17f6dca/')
+    end
+
+    it "returns the #score" do
+      expect(subject.score).to eq(44)
     end
 
     it "returns the #end_at" do
-      expected = Time.parse("2013-11-02 15:39:10 -0400")
-      expect(subject.end_at).to eq(expected)
+      expected = Time.parse('2015-03-08 06:22:40 UTC')
+      expect(subject.end_at.to_s).to eq(expected.to_s)
     end
 
     it "returns the #end_time_zone" do
       expect(subject.end_time_zone).to eq('America/Los_Angeles')
     end
 
-    it "returns the #start_time in milliseconds" do
-      expect(subject.start_time).to eq(1383448450201)
-    end
-
     it "returns the #start_at" do
-      expected = Time.parse("2013-11-02 15:14:10 -0400")
-      expect(subject.start_at).to eq(expected)
+      expected = Time.parse('2015-03-08 05:54:25 UTC')
+      expect(subject.start_at.to_s).to eq(expected.to_s)
     end
 
     it "returns the #start_time_zone" do
       expect(subject.start_time_zone).to eq('America/Los_Angeles')
     end
 
-    it "returns the #elapsed_time" do
-      expect(subject.elapsed_time).to eq(25.0)
+    it "returns the #duration" do
+      expect(subject.duration).to eq(1694.2)
     end
 
     it "returns the #path encoded polyline" do
@@ -91,12 +87,35 @@ describe Automatic::Client::Trip do
       expect(subject.fuel_cost).to eq(1.0428111627932486)
     end
 
+    it "returns the #fuel_volume_l" do
+      expect(subject.fuel_volume_l).to eq(0.2465857561582522)
+    end
+
     it "returns the #fuel_volume" do
-      expect(subject.fuel_volume).to eq(0.2465857561582522)
+      expect(subject.fuel_volume).to eq(0.06514105237583781)
+    end
+
+    it "returns the #average_kmpl" do
+      expect(subject.average_kmpl).to eq(16.56434586845349)
     end
 
     it "returns the #average_mpg" do
-      expect(subject.average_mpg).to eq(16.56434586845349)
+      expect(subject.average_mpg).to eq(39.0)
+    end
+
+    describe ".events" do
+      context "with events" do
+      end
+
+      context "without events" do
+        it "returns an empty collection" do
+          expect(subject.events).to eq([])
+        end
+
+        it "returns false for #events?" do
+          expect(subject.events?).to be_false
+        end
+      end
     end
 
     context "event counter cache" do
