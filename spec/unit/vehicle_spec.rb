@@ -18,8 +18,8 @@ describe Automatic::Client::Vehicle do
       expect(subject.id).to eq('529e5772e4b00a2ddb562f1f')
     end
 
-    it "returns the #uri" do
-      expect(subject.uri).to eq('https://api.automatic.com/v1/vehicles/529e5772e4b00a2ddb562f1f')
+    it "returns the #url" do
+      expect(subject.url).to eq('https://api.automatic.com/v1/vehicles/529e5772e4b00a2ddb562f1f')
     end
 
     it "returns the #year" do
@@ -32,6 +32,10 @@ describe Automatic::Client::Vehicle do
 
     it "returns the #model" do
       expect(subject.model).to eq('MDX')
+    end
+
+    it "returns the #sub_model" do
+      expect(subject.sub_model).to eq('Sub')
     end
 
     # NOTE: This should return the HEX
