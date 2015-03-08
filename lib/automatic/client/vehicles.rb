@@ -38,10 +38,11 @@ module Automatic
         when 200
           raw_vehicles = []
 
+          metadata    = Automatic::Client::Response::Metadata.new(json_body.fetch('_metadata', {}))
           link_header = Automatic::Client::Response::LinkHeader.new(response.headers['Link'])
           links       = link_header.links
 
-          raw_vehicles.concat(json_body)
+          raw_vehicles.concat(json_body.fetch('results', []))
 
           if links.next?
             loop do
@@ -52,7 +53,7 @@ module Automatic
               link_header = Automatic::Client::Response::LinkHeader.new(response.headers['Link'])
               links       = link_header.links
 
-              raw_vehicles.concat(json_body)
+              raw_vehicles.concat(json_body.fetch('results', []))
 
               break unless links.next?
             end
