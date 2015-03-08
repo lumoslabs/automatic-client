@@ -15,7 +15,31 @@ describe Automatic::Client::User do
 
   context "with all values" do
     it "returns the #id" do
-      expect(subject.id).to eq('6sQPMSEW71FQ3H')
+      expect(subject.id).to eq('U_6sQPMSEW71FQ3H')
+    end
+
+    it "returns the #url" do
+      expect(subject.url).to eq('https://api.automatic.com/user/U_6sQPMSEW71FQ3H')
+    end
+
+    it "returns the #username" do
+      expect(subject.username).to eq('lester@example.com')
+    end
+
+    it "returns the #first_name" do
+      expect(subject.first_name).to eq('Lester')
+    end
+
+    it "returns the #last_name" do
+      expect(subject.last_name).to eq('Tester')
+    end
+
+    it "returns the #full_name" do
+      expect(subject.full_name).to eq('Lester Tester')
+    end
+
+    it "returns the #email" do
+      expect(subject.email).to eq('lester@example.com')
     end
   end
 end
