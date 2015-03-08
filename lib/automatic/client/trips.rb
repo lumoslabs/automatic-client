@@ -54,7 +54,7 @@ module Automatic
 
           raw_trips.concat(json_body.fetch('results', []))
 
-          if links.next? && false
+          if links.next?
             loop do
               request   = Automatic::Client::Request.get(links.next.uri, options)
               response  = request
