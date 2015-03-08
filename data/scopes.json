@@ -1,0 +1,52 @@
+[
+  {
+    "name": "scope:public",
+    "description": "Access to public information about user.",
+    "extra" : null
+  },
+  {
+    "name": "scope:user:profile",
+    "description": "Access to user's profile (i.e. first_name, last_name).",
+    "extra" : null
+  },
+  {
+    "name": "scope:user:follow",
+    "description": "Ability to follow other users.",
+    "extra" : null
+  },
+  {
+    "name": "scope:location",
+    "description": "Access to historical location. Applies to all events.",
+    "extra" : null
+  },
+  {
+    "name": "scope:current_location",
+    "description": "Access to user's current location.",
+    "extra" : null
+  },
+  {
+    "name": "scope:vehicle:profile",
+    "description": "Access to vehicle information (i.e. year, make, model. Applies to all events.",
+    "extra" : null
+  },
+  {
+    "name": "scope:vehicle:events",
+    "description": "Access to real-time vehicle events (i.e. hard_brake, hard_accel).",
+    "extra" : null
+  },
+  {
+    "name": "scope:vehicle:vin",
+    "description": "Access to vehicle VIN.",
+    "extra" : null
+  },
+  {
+    "name": "scope:trip",
+    "description": "Access to user's trips.",
+    "extra": "The Trip endpoint requires many scopes to get the complete set of data. scope:trip alone does not give very much, but is required to get anything in the Trip object."
+  },
+  {
+    "name": "scope:behavior",
+    "description": "Access to user's driving profile.",
+    "extra" : null
+  }
+]
