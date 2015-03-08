@@ -111,8 +111,12 @@ module Automatic
       end
       alias :duration_over_70 :duration_over_70_s
 
-      def score
-        @attributes.fetch('score', 0).to_i
+      def score_a
+        @attributes.fetch('score_a', 0).to_i
+      end
+
+      def score_b
+        @attributes.fetch('score_b', 0).to_i
       end
 
       def fuel_cost_usd
@@ -137,6 +141,18 @@ module Automatic
         val = self.average_kmpl
         val = (val * 2.35214583)
         ("%.1f" % [val]).to_f
+      end
+
+      def city_fraction
+        @attributes.fetch('city_fraction', 0).to_f
+      end
+
+      def highway_fraction
+        @attributes.fetch('highway_fraction', 0).to_f
+      end
+
+      def night_driving_fraction
+        @attributes.fetch('night_driving_fraction', 0).to_f
       end
 
       # TODO: Return a Polymorphic Events Object

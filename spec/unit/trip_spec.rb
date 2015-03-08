@@ -52,8 +52,12 @@ describe Automatic::Client::Trip do
       expect(subject.url).to eq('https://api.automatic.com/trip/T_524da549e4b08d1af17f6dca/')
     end
 
-    it "returns the #score" do
-      expect(subject.score).to eq(44)
+    it "returns the #score_a" do
+      expect(subject.score_a).to eq(44)
+    end
+
+    it "returns the #score_b" do
+      expect(subject.score_b).to eq(56)
     end
 
     it "returns the #end_at" do
@@ -109,6 +113,18 @@ describe Automatic::Client::Trip do
 
     it "returns the #average_mpg" do
       expect(subject.average_mpg).to eq(39.0)
+    end
+
+    it "returns the #city_fraction" do
+      expect(subject.city_fraction).to eq(0.41)
+    end
+
+    it "returns the #highway_fraction" do
+      expect(subject.highway_fraction).to eq(0.59)
+    end
+
+    it "returns the #night_driving_fraction" do
+      expect(subject.night_driving_fraction).to eq(0.33)
     end
 
     describe ".events" do
