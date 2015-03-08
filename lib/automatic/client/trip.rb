@@ -80,7 +80,7 @@ module Automatic
       end
 
       def distance_in_miles
-        (distance_m.to_i * 0.000621371)
+        (self.distance_m.to_i * 0.000621371)
       end
 
       def distance_m
@@ -162,7 +162,7 @@ module Automatic
       end
 
       def end_address_params
-        @attributes.fetch('end_addres', {})
+        @attributes.fetch('end_address', {})
       end
 
       def start_location_params
