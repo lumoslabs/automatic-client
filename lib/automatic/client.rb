@@ -8,6 +8,9 @@ Dotenv.load
 require 'automatic/scopes'
 require 'automatic/scope'
 
+require 'automatic/errors'
+require 'automatic/error'
+
 require "automatic/client/version"
 
 require "automatic/client/request"
@@ -45,8 +48,17 @@ module Automatic
       scope_definitions      = MultiJson.load(File.read(scope_definitions_file))
 
       @scopes = Automatic::Scopes.new(scope_definitions)
-
       @scopes
+    end
+
+    def self.errors
+      return @errors if @errors
+
+      error_definitions_file = File.expand_path('../../../data/errors.json', __FILE__)
+      error_definitions      = MultiJson.load(File.read(error_definitions_file))
+
+      @errors = Automatic::Errors.new(error_definitions)
+      @errors
     end
 
     def self.routes

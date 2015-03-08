@@ -1,27 +1,25 @@
 require 'spec_helper'
 
-describe Automatic::Client::Error do
-  let(:attributes) do
-    {
-      'status'  => 404,
-      'message' => 'Not Found'
-    }
+describe Automatic::Error do
+  let(:error_file) do
+    File.read(File.expand_path('../../data/error.json', __FILE__))
   end
 
-  subject { described_class.new(attributes) }
+  let(:error) do
+    MultiJson.load(error_file)
+  end
 
-  context "with all values" do
-    it "returns the error status code" do
-      expect(subject.status).to eq(404)
-    end
+  subject { described_class.new(error) }
 
-    it "returns the error message" do
-      expect(subject.message).to eq('Not Found')
-    end
+  it "returns the #code" do
+    expect(subject.code).to eq(404)
+  end
 
-    it "returns the #full_message" do
-      expected = "Status Code: 404, Message: Not Found"
-      expect(subject.full_message).to eq(expected)
-    end
+  it "returns the #name" do
+    expect(subject.name).to eq('not_found')
+  end
+
+  it "returns #extra" do
+    expect(subject.description).to eq('Record not Found')
   end
 end
