@@ -52,9 +52,9 @@ module Automatic
           link_header = Automatic::Client::Response::LinkHeader.new(response.headers['Link'])
           links       = link_header.links
 
-          raw_trips.concat(json_body)
+          raw_trips.concat(json_body.fetch('results', []))
 
-          if links.next?
+          if links.next? && false
             loop do
               request   = Automatic::Client::Request.get(links.next.uri, options)
               response  = request
@@ -63,7 +63,7 @@ module Automatic
               link_header = Automatic::Client::Response::LinkHeader.new(response.headers['Link'])
               links       = link_header.links
 
-              raw_trips.concat(json_body)
+              raw_trips.concat(json_body.fetch('results', []))
 
               break unless links.next?
             end
