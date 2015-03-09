@@ -19,7 +19,7 @@ describe Automatic::Client::User do
     end
 
     it "returns the #url" do
-      expect(subject.url).to eq('https://api.automatic.com/user/U_6sQPMSEW71FQ3H')
+      expect(subject.url).to eq('https://api.automatic.com/user/U_6sQPMSEW71FQ3H/')
     end
 
     it "returns the #username" do
