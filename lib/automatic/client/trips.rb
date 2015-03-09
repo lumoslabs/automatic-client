@@ -39,6 +39,12 @@ module Automatic
       #
       # @return [Array, Trips] Array of trip records
       def self.all(options={})
+        paginate = if options.has_key?(:paginate)
+                     options.delete(:paginate)
+                   else
+                     true
+                   end
+
         route = Automatic::Client.routes.route_for('trips')
 
         request   = Automatic::Client::Request.get(route.url_for, options)
@@ -54,7 +60,7 @@ module Automatic
 
           raw_trips.concat(json_body.fetch('results', []))
 
-          if links.next?
+          if links.next? && paginate
             loop do
               request   = Automatic::Client::Request.get(links.next.uri)
               response  = request
@@ -76,7 +82,7 @@ module Automatic
 
           raise UnauthorizedError.new(error.full_message)
         else
-          json_body.merge!('status' => 403)
+          json_body.merge!('status' => response.status)
           error = Automatic::Client::Error.new(json_body)
 
           raise StandardError.new(error.full_message)
