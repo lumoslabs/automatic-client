@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Trips",
+    "path": "/trip/{?page,per_page}",
+    "rel": "trips",
+    "templated": true
+  },
+  {
+    "name": "Trip Detail",
+    "path": "/trip/{id}/",
+    "rel": "trip",
+    "templated": true
+  },
+  {
+    "name": "Vehicles",
+    "path": "/vehicle/{?page,per_page}",
+    "rel": "vehicles",
+    "templated": true
+  },
+  {
+    "name": "Vehicle Detail",
+    "path": "/vehicle/{id}/",
+    "rel": "vehicle",
+    "templated": true
+  },
+  {
+    "name": "User Detail",
+    "path": "/user/{id}/",
+    "rel": "user",
+    "templated": true
+  },
+  {
+    "name": "User Profile",
+    "path": "/user/{id}/profile/",
+    "rel": "user-profile",
+    "templated": true
+  },
+  {
+    "name": "User Metadata",
+    "path": "/user/{id}/metadata/",
+    "rel": "user-metadata",
+    "templated": true
+  },
+  {
+    "name": "User Trips",
+    "path": "/user/{id}/trip/",
+    "rel": "user-trips",
+    "templated": true
+  },
+  {
+    "name": "User Vehicles",
+    "path": "/user/{id}/vehicle/",
+    "rel": "user-vehicles",
+    "templated": true
+  }
+]
