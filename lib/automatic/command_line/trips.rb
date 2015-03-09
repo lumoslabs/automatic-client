@@ -38,10 +38,42 @@ module Automatic
       end
 
       desc 'all', 'List all Automatic Trips'
+      option :started_at__lte, type: :string, banner: 'TEST'
+      option :started_at__gte, type: :string
+      option :ended_at__lte, type: :string
+      option :ended_at__gte, type: :string
+      option :limit, type: :numeric, banner: 'Limit of Results to Return'
+      option :page, type: :numeric, banner: 'Page of Results to Return'
       def all
         puts "\n"
 
-        trips = Automatic::Client::Trips.all(per_page: 25)
+        default_options = {
+          :page  => 1,
+          :limit => 50
+        }
+
+        limit = options[:limit]
+        page  = options[:page]
+
+        started_at__lte = options[:started_at__lte]
+        started_at__gte = options[:started_at__gte]
+
+        ended_at_lte = options[:ended_at_lte]
+        ended_at_gte = options[:ended_at_gte]
+
+        if limit
+          default_options.merge!(limit: limit)
+        end
+
+        if started_at__lte
+          default_options.merge!(started_at__lte: Time.parse(started_at__lte).to_i)
+        end
+
+        if started_at__gte
+          default_options.merge!(started_at__gte: Time.parse(started_at__gte).to_i)
+        end
+
+        trips = Automatic::Client::Trips.all(default_options)
 
         if trips.any?
           date_format = "%B %d %Y @ %I:%M %P"
