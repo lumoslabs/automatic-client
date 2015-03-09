@@ -25,7 +25,7 @@ module Automatic
         when 200
           Automatic::Client::Trip.new(json_body)
         else
-          json_body.merge!('status' => response.status)
+          json_body.merge!('status' => response.status, 'message' => json_body['detail'])
           error = Automatic::Client::Error.new(json_body)
 
           raise StandardError.new(error.full_message)
