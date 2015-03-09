@@ -56,7 +56,7 @@ module Automatic
 
           if links.next?
             loop do
-              request   = Automatic::Client::Request.get(links.next.uri, options)
+              request   = Automatic::Client::Request.get(links.next.uri)
               response  = request
               json_body = MultiJson.load(response.body)
 
