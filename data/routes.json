@@ -1,7 +1,7 @@
 [
   {
     "name": "Trips",
-    "path": "/trip/{?page,per_page}",
+    "path": "/trip/{?page,limit,started_at__lte,started_at__gte,ended_at__lte,ended_at__gte,vehicle}",
     "rel": "trips",
     "templated": true
   },
@@ -13,7 +13,7 @@
   },
   {
     "name": "Vehicles",
-    "path": "/vehicle/{?page,per_page}",
+    "path": "/vehicle/{?page,limit}",
     "rel": "vehicles",
     "templated": true
   },
@@ -43,13 +43,13 @@
   },
   {
     "name": "User Trips",
-    "path": "/user/{id}/trip/",
+    "path": "/user/{id}/trip/{?page,limit}",
     "rel": "user-trips",
     "templated": true
   },
   {
     "name": "User Vehicles",
-    "path": "/user/{id}/vehicle/",
+    "path": "/user/{id}/vehicle/{?page,limit}",
     "rel": "user-vehicles",
     "templated": true
   }
