@@ -9,8 +9,51 @@ module Automatic
     class Trips < Thor
       desc 'export', 'Export Automatic Trips to CSV'
       option :filename, type: :string, banner: 'trips-{timestamp}.csv', default: nil
+      option :started_at__lte, type: :string, banner: 'TEST'
+      option :started_at__gte, type: :string
+      option :ended_at__lte, type: :string
+      option :ended_at__gte, type: :string
+      option :limit, type: :numeric, banner: 'Limit of Results to Return'
+      option :page, type: :numeric, banner: 'Page of Results to Return'
+      option :paginate, type: :boolean, banner: 'Perform pagination on results', default: true
+
       def export
-        trips = Automatic::Client::Trips.all
+        puts "\n"
+
+        default_options = {
+          :page  => 1,
+          :limit => 50
+        }
+
+        limit = options[:limit]
+        page  = options[:page]
+
+        paginate = options[:paginate]
+        default_options.merge!(paginate: paginate)
+
+        started_at__lte = options[:started_at__lte]
+        started_at__gte = options[:started_at__gte]
+
+        ended_at_lte = options[:ended_at_lte]
+        ended_at_gte = options[:ended_at_gte]
+
+        if limit
+          default_options.merge!(limit: limit)
+        end
+
+        if page
+          default_options.merge!(page: page)
+        end
+
+        if started_at__lte
+          default_options.merge!(started_at__lte: Time.parse(started_at__lte).to_i)
+        end
+
+        if started_at__gte
+          default_options.merge!(started_at__gte: Time.parse(started_at__gte).to_i)
+        end
+
+        trips = Automatic::Client::Trips.all(default_options)
 
         if trips.any?
           default_filename = "trips-%s.csv" % [Time.now.utc.to_i]
