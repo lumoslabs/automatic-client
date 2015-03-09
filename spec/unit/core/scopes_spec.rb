@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Automatic::Scopes do
+describe Automatic::Core::Scopes do
   let(:scope_file) do
-    File.read(File.expand_path('../../data/scope.json', __FILE__))
+    File.read(File.expand_path('../../../data/scope.json', __FILE__))
   end
 
   let(:scope) do

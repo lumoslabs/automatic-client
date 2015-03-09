@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Automatic::Error do
+describe Automatic::Core::Error do
   let(:error_file) do
-    File.read(File.expand_path('../../data/error.json', __FILE__))
+    File.read(File.expand_path('../../../data/error.json', __FILE__))
   end
 
   let(:error) do

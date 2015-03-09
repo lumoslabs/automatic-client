@@ -5,11 +5,7 @@ require 'restless_router'
 require 'dotenv'
 Dotenv.load
 
-require 'automatic/scopes'
-require 'automatic/scope'
-
-require 'automatic/errors'
-require 'automatic/error'
+require 'automatic/core'
 
 require "automatic/client/version"
 
@@ -47,7 +43,7 @@ module Automatic
       scope_definitions_file = File.expand_path('../../../data/scopes.json', __FILE__)
       scope_definitions      = MultiJson.load(File.read(scope_definitions_file))
 
-      @scopes = Automatic::Scopes.new(scope_definitions)
+      @scopes = Automatic::Core::Scopes.new(scope_definitions)
       @scopes
     end
 
@@ -57,7 +53,7 @@ module Automatic
       error_definitions_file = File.expand_path('../../../data/errors.json', __FILE__)
       error_definitions      = MultiJson.load(File.read(error_definitions_file))
 
-      @errors = Automatic::Errors.new(error_definitions)
+      @errors = Automatic::Core::Errors.new(error_definitions)
       @errors
     end
 
