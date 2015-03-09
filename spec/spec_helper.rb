@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load!('.env.test')
+
 require 'webmock/rspec'
 
 # Load support files
