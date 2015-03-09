@@ -44,6 +44,8 @@ module Automatic
       option :ended_at__gte, type: :string
       option :limit, type: :numeric, banner: 'Limit of Results to Return'
       option :page, type: :numeric, banner: 'Page of Results to Return'
+      option :paginate, type: :boolean, banner: 'Perform pagination on results', default: true
+
       def all
         puts "\n"
 
@@ -55,6 +57,9 @@ module Automatic
         limit = options[:limit]
         page  = options[:page]
 
+        paginate = options[:paginate]
+        default_options.merge!(paginate: paginate)
+
         started_at__lte = options[:started_at__lte]
         started_at__gte = options[:started_at__gte]
 
@@ -63,6 +68,10 @@ module Automatic
 
         if limit
           default_options.merge!(limit: limit)
+        end
+
+        if page
+          default_options.merge!(page: page)
         end
 
         if started_at__lte
