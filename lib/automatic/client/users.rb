@@ -14,7 +14,7 @@ module Automatic
         when 200
           Automatic::Client::User.new(response_body)
         else
-          response_body.merge!('status' => response.status)
+          response_body.merge!('status' => response.status, 'message' => response_body['detail'])
           error = Automatic::Client::Error.new(response_body)
 
           raise StandardError.new(error.full_message)
