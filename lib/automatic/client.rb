@@ -64,16 +64,14 @@ module Automatic
     def self.routes
       return @routes if @routes
 
+      route_definitions_file = File.expand_path('../../../data/routes.json', __FILE__)
+      route_definitions      = MultiJson.load(File.read(route_definitions_file))
+
       @routes = RestlessRouter::Routes.new
-      @routes.add_route(RestlessRouter::Route.new('trips', 'https://api.automatic.com/trip/{?page,per_page}', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('trip', 'https://api.automatic.com/trip/{id}', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('vehicles', 'https://api.automatic.com/vehicle/{?page,per_page}', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('vehicle', 'https://api.automatic.com/vehicle/{id}', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('user', 'https://api.automatic.com/user/{id}', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('user-profile', 'https://api.automatic.com/user/{id}/profile/', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('user-metadata', 'https://api.automatic.com/user/{id}/metadata/', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('user-trips', 'https://api.automatic.com/user/{id}/trip/', templated: true))
-      @routes.add_route(RestlessRouter::Route.new('user-vehicles', 'https://api.automatic.com/user/{id}/vehicle/', templated: true))
+
+      route_definitions.each do |definition|
+        @routes.add_route(RestlessRouter::Route.new(definition['rel'], definition['path'], templated: definition['templated']))
+      end
 
       @routes
     end
