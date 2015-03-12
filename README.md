@@ -1,6 +1,7 @@
 # Automatic Link Client
 
 [![Build Status](https://travis-ci.org/nateklaiber/automatic-client.png)](https://travis-ci.org/nateklaiber/automatic-client)
+[![Gem Version](https://badge.fury.io/rb/automatic-client.svg)](http://badge.fury.io/rb/automatic-client)
 
 A wrapper to consume the [Automatic
 API](https://www.automatic.com/developer/documentation/). 
