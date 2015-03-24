@@ -13,3 +13,15 @@ task default: [:spec]
 
 desc "Document the library"
 task doc: [:yard]
+
+desc "Interactive Console"
+task :console do
+  libs = []
+  libs << "-r irb/completion"
+  libs << "-r %s" % [File.expand_path('../lib/automatic', __FILE__)]
+
+  cmd = "irb %s --simple-prompt" % [libs.join(' ')]
+
+  puts "Loading automatic gem"
+  system(cmd)
+end
