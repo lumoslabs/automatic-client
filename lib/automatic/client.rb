@@ -14,7 +14,6 @@ require "automatic/client/error"
 
 require "automatic/client/response"
 
-
 require "automatic/client/polyline"
 
 require "automatic/client/trips"
@@ -47,6 +46,16 @@ module Automatic
 
       @scopes = Automatic::Core::Scopes.new(scope_definitions)
       @scopes
+    end
+
+    def self.webhooks
+      return @webhooks if @webhooks
+
+      webhook_definitions_file = File.expand_path('../../../data/webhooks.json', __FILE__)
+      webhook_definitions      = MultiJson.load(File.read(webhook_definitions_file))
+
+      @webhooks = Automatic::Core::Webhooks.new(webhook_definitions)
+      @webhooks
     end
 
     def self.errors
