@@ -79,3 +79,9 @@ task :console do
   puts "Loading Automatic gem (%s)..." % [command]
   system(command)
 end
+
+desc "List the Available Routes"
+task :routes do
+  command = "bundle exec bin/routes all"
+  system(command)
+end
