@@ -118,6 +118,15 @@ trip_route.url_for(id: '1234')
 # => "https://api.automatic.com/v1/trips/1234"
 ```
 
+## Responsibilities
+
+* **Configuration**: Use the `ENV` or runtime defined configuration options.
+* **Connection**: Create a connection to the API Host and handle server communication.
+* **Request Handling**: Make requests to the API Host and handle server communication.
+* **Response Handling**: Consume the _body_ of the `Request` and handle accordingly.
+* **Error Handling**: Ensure the `Response` error and cast to domain specific models.
+* **Response Modeling**: Use the `Response` and cast to domain specific models.
+
 ## Contributing
 
 1. Fork it
