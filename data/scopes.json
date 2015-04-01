@@ -48,5 +48,10 @@
     "name": "scope:behavior",
     "description": "Access to user's driving profile.",
     "extra" : null
+  },
+  {
+    "name": "scope:adapter:basic",
+    "description": "Direct bluetooth access to all Adapters on user's account",
+    "extra" : null
   }
 ]
