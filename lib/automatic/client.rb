@@ -1,4 +1,6 @@
+require 'logger'
 require 'multi_json'
+require 'faraday'
 
 require 'restless_router'
 
@@ -6,6 +8,8 @@ require 'dotenv'
 Dotenv.load
 
 require 'automatic/core'
+
+require 'automatic/configuration'
 
 require "automatic/client/version"
 
@@ -38,6 +42,18 @@ require "automatic/utilities"
 
 module Automatic
   module Client
+    class << self
+      attr_accessor :configuration
+    end
+
+    def self.configuration
+      @configuration ||= Automatic::Configuration.new
+    end
+
+    def self.configure
+      yield(self.configuration)
+    end
+
     def self.scopes
       return @scopes if @scopes
 
