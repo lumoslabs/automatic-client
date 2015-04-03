@@ -1,7 +1,7 @@
 [
   {
     "name": "Trips",
-    "path": "/trip/{?page,limit,started_at__lte,started_at__gte,ended_at__lte,ended_at__gte,vehicle}",
+    "path": "/trip/{?page,limit,started_at__lte,started_at__gte,ended_at__lte,ended_at__gte,vehicle,tags__in}",
     "rel": "trips",
     "templated": true
   },
@@ -9,6 +9,18 @@
     "name": "Trip Detail",
     "path": "/trip/{id}/",
     "rel": "trip",
+    "templated": true
+  },
+  {
+    "name": "Tag a Trip",
+    "path": "/trip/{id}/tag/",
+    "rel": "tag-trip",
+    "templated": true
+  },
+  {
+    "name": "Tag Detail for a Trip",
+    "path": "/trip/{id}/tag/{slug}",
+    "rel": "tag-detail-trip",
     "templated": true
   },
   {
@@ -51,6 +63,18 @@
     "name": "User Vehicles",
     "path": "/user/{id}/vehicle/{?page,limit}",
     "rel": "user-vehicles",
+    "templated": true
+  },
+  {
+    "name": "Tags",
+    "path": "/tag/{?page,limit,tag__ibeginswith}",
+    "rel": "tags",
+    "templated": true
+  },
+  {
+    "name": "Tag Detail",
+    "path": "/tag/{slug}/",
+    "rel": "tag",
     "templated": true
   }
 ]
