@@ -36,24 +36,6 @@ module Automatic
       @configuration ||= Automatic::Configuration.new
     end
 
-module Automatic
-  module Client
-    class << self
-      attr_accessor :configuration
-      attr_accessor :scopes
-      attr_accessor :webhooks
-      attr_accessor :errors
-      attr_accessor :routes
-    end
-
-    # Configuration details for them and interacting
-    # with the Automatic API.
-    #
-    # @return [Automatic::Configuration] Configuration with defaults applied
-    def self.configuration
-      @configuration ||= Automatic::Configuration.new
-    end
-
     # Modify the configuration details via a `block`
     #
     # @return [Automatic::Configuration]
