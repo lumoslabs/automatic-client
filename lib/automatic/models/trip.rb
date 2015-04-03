@@ -1,5 +1,5 @@
 module Automatic
-  module Client
+  module Models
     class Trip
       def initialize(attributes={})
         @attributes = attributes
@@ -22,11 +22,11 @@ module Automatic
       end
 
       def end_location
-        @end_location ||= Automatic::Client::Location.new(end_location_params)
+        @end_location ||= Automatic::Models::Location.new(end_location_params)
       end
 
       def end_address
-        @end_address ||= Automatic::Client::Address.new(end_address_params)
+        @end_address ||= Automatic::Models::Address.new(end_address_params)
       end
 
       def end_at
@@ -38,11 +38,11 @@ module Automatic
       end
 
       def start_location
-        @start_location ||= Automatic::Client::Location.new(start_location_params)
+        @start_location ||= Automatic::Models::Location.new(start_location_params)
       end
 
       def start_address
-        @start_address ||= Automatic::Client::Address.new(start_address_params)
+        @start_address ||= Automatic::Models::Address.new(start_address_params)
       end
 
       def start_at
@@ -76,7 +76,7 @@ module Automatic
       #
       # @return [Polyline] The Polyline object
       def polyline
-        @polyline ||= Automatic::Client::Polyline.new(self.path)
+        @polyline ||= Automatic::Models::Polyline.new(self.path)
       end
 
       def distance_in_miles
@@ -155,9 +155,8 @@ module Automatic
         @attributes.fetch('night_driving_fraction', 0).to_f
       end
 
-      # TODO: Return a Polymorphic Events Object
       def events
-        @attributes.fetch('vehicle_events', [])
+        @events ||= Automatic::Models::VehicleEvents.new(@attributes.fetch('vehicle_events', []))
       end
 
       def events?
