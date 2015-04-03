@@ -3,28 +3,55 @@ module Automatic
     class Users
       include Enumerable
 
+      RecordNotFoundError = Class.new(StandardError)
+
+      # Find a User by the specified ID
+      #
+      # @param id [String] The Automatic User ID
+      # @param options [Hash] HTTP Query String Parameters
+      #
+      # @return [Automatic::Models::User,Nil]
       def self.find_by_id(id, options={})
-        route = Automatic::Client.routes.route_for('user')
+        user_route = Automatic::Client.routes.route_for('user')
+        user_url   = user_route.url_for(id: id)
 
-        request       = Automatic::Client::Request.get(route.url_for(id: id), options)
-        response      = request
-        response_body = MultiJson.load(response.body)
+        request = Automatic::Client.get(user_url, options)
 
-        case(response.status)
-        when 200
-          Automatic::Models::User.new(response_body)
+        if request.success?
+          Automatic::Models::User.new(request.body)
         else
-          response_body.merge!('status' => response.status, 'message' => response_body['detail'])
-          error = Automatic::Models::Error.new(response_body)
-
-          raise StandardError.new(error.full_message)
+          nil
         end
       end
 
+      # Find a User by the specified ID
+      #
+      # @param id [String] The Automatic User ID
+      # @param options [Hash] HTTP Query String Parameters
+      #
+      # @rase [RecordNotFoundError] if no User can be found
+      #
+      # @return [Automatic::Models::User] Automatic User Model
+      def self.find_by_id!(id, options={})
+        user = self.find_by_id(id, options)
+
+        raise RecordNotFoundError.new("Could not find User with ID %s" % [id]) if user.nil?
+
+        user
+      end
+
+      # Create a new Users instance
+      #
+      # @param collection [Array] A collection of User Definitions
+      #
+      # @return [Automatic::Client::Users]
       def initialize(collection)
         @collection = Array(collection)
       end
 
+      # Enable Enumerable support
+      #
+      # @return [Automatic::Models::Users] A collection of users
       def each(&block)
         users_collection.each(&block)
       end
