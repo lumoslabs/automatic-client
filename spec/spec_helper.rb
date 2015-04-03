@@ -1,5 +1,5 @@
 require 'dotenv'
-Dotenv.load!('.env.test')
+Dotenv.load!('.env.test') if File.exists?('.env.test')
 
 require 'webmock/rspec'
 
