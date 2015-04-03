@@ -10,6 +10,7 @@ describe Automatic::Configurations::Default do
       ENV.stub(:[]).with('AUTOMATIC_ACCESS_TOKEN').and_return('abcd123')
       ENV.stub(:[]).with('AUTOMATIC_API_HOST').and_return('http://api.example.com')
       ENV.stub(:[]).with('AUTOMATIC_MEDIA_TYPE').and_return('text/csv')
+      ENV.stub(:[]).with('AUTOMATIC_CONTENT_TYPE').and_return('text/csv')
       ENV.stub(:[]).with('AUTOMATIC_AUTO_PAGINATE').and_return('false')
       ENV.stub(:[]).with('AUTOMATIC_REQUEST_LOGGER').and_return(Logger.new(STDOUT))
       ENV.stub(:[]).with('AUTOMATIC_CACHE_LOGGER').and_return(Logger.new(STDOUT))
@@ -30,6 +31,10 @@ describe Automatic::Configurations::Default do
 
     it "returns text/csv for the default #media_type" do
       expect(described_class.media_type).to eq('text/csv')
+    end
+
+    it "returns text/csv for the default #content_type" do
+      expect(described_class.content_type).to eq('text/csv')
     end
 
     it "returns false for #auto_paginate" do
@@ -54,8 +59,9 @@ describe Automatic::Configurations::Default do
     it "returns the default #connection_options hash" do
       expected = {
         :headers => {
-          :accept     => 'text/csv',
-          :user_agent => 'TestAgent'
+          :accept       => 'text/csv',
+          :user_agent   => 'TestAgent',
+          :content_type => 'text/csv'
         }
       }
       expect(described_class.connection_options).to eq(expected)
@@ -71,6 +77,7 @@ describe Automatic::Configurations::Default do
       ENV.stub(:[]).with('AUTOMATIC_ACCESS_TOKEN').and_return(nil)
       ENV.stub(:[]).with('AUTOMATIC_API_HOST').and_return(nil)
       ENV.stub(:[]).with('AUTOMATIC_MEDIA_TYPE').and_return(nil)
+      ENV.stub(:[]).with('AUTOMATIC_CONTENT_TYPE').and_return(nil)
       ENV.stub(:[]).with('AUTOMATIC_AUTO_PAGINATE').and_return(nil)
       ENV.stub(:[]).with('AUTOMATIC_REQUEST_LOGGER').and_return(nil)
       ENV.stub(:[]).with('AUTOMATIC_CACHE_LOGGER').and_return(nil)
@@ -93,16 +100,20 @@ describe Automatic::Configurations::Default do
       expect(described_class.media_type).to eq('application/json')
     end
 
+    it "returns application/json for the default #content_type" do
+      expect(described_class.content_type).to eq('application/json')
+    end
+
     it "returns false for #auto_paginate" do
       expect(described_class.auto_paginate).to be_false
     end
 
     it "returns nil for the #request_logger" do
-      expect(described_class.request_logger).to be_nil
+      expect(described_class.request_logger).to be_a(Logger)
     end
 
     it "returns nil for the #cache_logger" do
-      expect(described_class.cache_logger).to be_nil
+      expect(described_class.cache_logger).to be_a(Logger)
     end
 
     it "returns the #options for specified Automatic::Configuration.keys" do
@@ -115,8 +126,9 @@ describe Automatic::Configurations::Default do
     it "returns the default #connection_options hash" do
       expected = {
         :headers => {
-          :accept     => 'application/json',
-          :user_agent => 'Automatic Ruby Gem 1.2.3'
+          :accept       => 'application/json',
+          :user_agent   => 'Automatic Ruby Gem 1.2.3',
+          :content_type => 'application/json'
         }
       }
       expect(described_class.connection_options).to eq(expected)

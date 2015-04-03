@@ -8,6 +8,7 @@ describe Automatic::Configuration do
       :connection_options,
       :middleware,
       :user_agent,
+      :content_type,
       :media_type,
       :auto_paginate,
       :cache_logger,
@@ -44,6 +45,10 @@ describe Automatic::Configuration do
 
     it "responds to #media_type" do
       expect(subject).to respond_to(:media_type)
+    end
+
+    it "responds to #content_type" do
+      expect(subject).to respond_to(:content_type)
     end
 
     it "responds to #auto_paginate" do

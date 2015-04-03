@@ -11,6 +11,7 @@ module Automatic
     # Request
     attr_accessor :user_agent
     attr_accessor :media_type
+    attr_accessor :content_type
 
     # Pagination
     attr_accessor :auto_paginate
@@ -26,6 +27,7 @@ module Automatic
         :connection_options,
         :middleware,
         :user_agent,
+        :content_type,
         :media_type,
         :auto_paginate,
         :cache_logger,
