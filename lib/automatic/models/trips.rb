@@ -6,7 +6,7 @@ module Automatic
       RecordNotFoundError = Class.new(StandardError)
 
       # Creates a new instance of the Trips Collection. This is
-      # used to wrap the vehicles and allow extra support for finders,
+      # used to wrap the trips and allow extra support for finders,
       # sorting, and grouping
       #
       # @param collection [Array] A collection of Automatic Trip Definitions
@@ -79,7 +79,7 @@ module Automatic
 
           if links.next? && paginate
             loop do
-              request   = Automatic::Client.get(links.next.uri)
+              request = Automatic::Client.get(links.next.uri)
 
               link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
               links       = link_header.links
