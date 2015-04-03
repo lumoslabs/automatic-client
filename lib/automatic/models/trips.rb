@@ -55,9 +55,9 @@ module Automatic
       # Make a connection to Automatic to retrieve all trips. By default
       # we will stream until we have all trips. You can set `per_page` and `page` in the request.
       #
-      # # NOTE: This will be the first item to refactor!
+      # @param options [Hash] Options to send to the HTTP request.
       #
-      # @return [Array, Trips] Array of trip records
+      # @return [Automatic::Model::Trips] Automatic Trips Model
       def self.all(options={})
         paginate = if options.has_key?(:paginate)
                      options.delete(:paginate)
@@ -65,47 +65,35 @@ module Automatic
                      true
                    end
 
-        route = Automatic::Client.routes.route_for('trips')
+        trips_route = Automatic::Client.routes.route_for('trips')
+        trips_url   = trips_route.url_for
 
-        request   = Automatic::Client::Request.get(route.url_for, options)
-        response  = request
-        json_body = MultiJson.load(response.body)
+        request = Automatic::Client.get(trips_url, options)
 
-        case(response.status)
-        when 200
+        if request.success?
           raw_trips = []
 
-          link_header = Automatic::Models::Response::LinkHeader.new(response.headers['Link'])
+          link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
           links       = link_header.links
 
-          raw_trips.concat(json_body.fetch('results', []))
+          raw_trips.concat(request.body.fetch('results', []))
 
           if links.next? && paginate
             loop do
-              request   = Automatic::Client::Request.get(links.next.uri)
-              response  = request
-              json_body = MultiJson.load(response.body)
+              request   = Automatic::Client.get(links.next.uri)
 
-              link_header = Automatic::Models::Response::LinkHeader.new(response.headers['Link'])
+              link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
               links       = link_header.links
 
-              raw_trips.concat(json_body.fetch('results', []))
+              raw_trips.concat(request.body.fetch('results', []))
 
               break unless links.next?
             end
           end
 
           self.new(raw_trips)
-        when 403
-          json_body.merge!('status' => 403)
-          error = Automatic::Models::Error.new(json_body)
-
-          raise UnauthorizedError.new(error.full_message)
         else
-          json_body.merge!('status' => response.status)
-          error = Automatic::Models::Error.new(json_body)
-
-          raise StandardError.new(error.full_message)
+          raise StandardError.new(request.body)
         end
       end
 
