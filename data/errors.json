@@ -20,6 +20,11 @@
     "description": "The token attached to the request doesn't have the scope needed to access this endpoint."
   },
   {
+    "code": 406,
+    "name": "err_unknown_error",
+    "description": "Could not satisfy the request Accept header"
+  },
+  {
     "code": 409,
     "name": "error_conflict",
     "description": "Conflict found."
