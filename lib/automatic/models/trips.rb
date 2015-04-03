@@ -4,7 +4,6 @@ module Automatic
       include Enumerable
 
       RecordNotFoundError = Class.new(StandardError)
-      UnauthorizedError   = Class.new(StandardError)
 
       # Creates a new instance of the Trips Collection. This is
       # used to wrap the vehicles and allow extra support for finders,
