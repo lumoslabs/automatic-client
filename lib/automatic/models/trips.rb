@@ -1,34 +1,54 @@
 module Automatic
   module Models
     class Trips
-      UnauthorizedError = Class.new(StandardError)
-
       include Enumerable
+
+      RecordNotFoundError = Class.new(StandardError)
+      UnauthorizedError   = Class.new(StandardError)
 
       # Creates a new instance of the Trips Collection. This is
       # used to wrap the vehicles and allow extra support for finders,
       # sorting, and grouping
       #
-      # @return [Trips] Instance of the object
+      # @param collection [Array] A collection of Automatic Trip Definitions
+      #
+      # @return [Automatic::Models::Trips] Instance of the object
       def initialize(collection={})
         @collection = Array(collection)
       end
 
+      # Find a Trip by the specified ID
+      #
+      # @param id [String] The Automatic Trip ID
+      # @param options [Hash] HTTP Query String Parameters
+      #
+      # @raise [RecordNotFoundError] if no Trip can be found
+      #
+      # @return [Automatic::Models::Trip] Automatic Trip Model
+      def self.find_by_id!(id, options={})
+        trip = self.find_by_id(id, options)
+
+        raise RecordNotFoundError.new("Could not find Trip with ID %s" % [id]) if trip.nil?
+
+        trip
+      end
+
+      # Find a Trip by the specified ID
+      #
+      # @param id [String] The Automatic Trip ID
+      # @param options [Hash] HTTP Query String Parameters
+      #
+      # @return [Automatic::Models::Trip,Nil]
       def self.find_by_id(id, options={})
-        route = Automatic::Client.routes.route_for('trip')
+        trip_route = Automatic::Client.routes.route_for('trip')
+        trip_url   = trip_route.url_for(id: id)
 
-        request   = Automatic::Client::Request.get(route.url_for(id: id), options)
-        response  = request
-        json_body = MultiJson.load(response.body)
+        request = Automatic::Client.get(trip_url, options)
 
-        case(response.status)
-        when 200
-          Automatic::Models::Trip.new(json_body)
+        if request.success?
+          Automatic::Models::Trip.new(request.body)
         else
-          json_body.merge!('status' => response.status, 'message' => json_body['detail'])
-          error = Automatic::Models::Error.new(json_body)
-
-          raise StandardError.new(error.full_message)
+          nil
         end
       end
 
