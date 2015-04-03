@@ -63,7 +63,7 @@ describe Automatic::Core::Errors do
     end
 
     it "returns true for #any?" do
-      expect(subject.any?).to be_true
+      expect(subject.any?).to be(true)
     end
   end
 
@@ -75,7 +75,7 @@ describe Automatic::Core::Errors do
     end
 
     it "returns true for #any?" do
-      expect(subject.any?).to be_true
+      expect(subject.any?).to be(true)
     end
   end
 end

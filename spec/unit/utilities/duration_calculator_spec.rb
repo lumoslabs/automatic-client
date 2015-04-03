@@ -66,7 +66,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns true for #minutes?" do
-        expect(subject.minutes?).to be_true
+        expect(subject.minutes?).to be(true)
       end
 
       it "returns a default formatted #to_s" do
@@ -90,7 +90,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns true for #hours?" do
-        expect(subject.hours?).to be_true
+        expect(subject.hours?).to be(true)
       end
 
       it "returns the #minutes" do
@@ -98,7 +98,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns true for #minutes?" do
-        expect(subject.minutes?).to be_true
+        expect(subject.minutes?).to be(true)
       end
 
       it "returns a default formatted #to_s" do
@@ -114,7 +114,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns true for #days?" do
-        expect(subject.days?).to be_true
+        expect(subject.days?).to be(true)
       end
 
       it "returns 0 for the #hours" do
@@ -122,7 +122,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns true for #hours?" do
-        expect(subject.hours?).to be_true
+        expect(subject.hours?).to be(true)
       end
 
       it "returns the #minutes" do
@@ -130,7 +130,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns true for #minutes?" do
-        expect(subject.minutes?).to be_true
+        expect(subject.minutes?).to be(true)
       end
 
       it "returns a default formatted #to_s" do
@@ -145,7 +145,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns true for #days?" do
-      expect(subject.days?).to be_true
+      expect(subject.days?).to be(true)
     end
 
     it "returns the #hours" do
@@ -153,7 +153,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns true for #hours?" do
-      expect(subject.hours?).to be_true
+      expect(subject.hours?).to be(true)
     end
 
     it "returns the #minutes" do
@@ -161,7 +161,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns true for #minutes?" do
-      expect(subject.minutes?).to be_true
+      expect(subject.minutes?).to be(true)
     end
 
     it "returns a default formatted #to_s" do
@@ -185,7 +185,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns true for #hours?" do
-      expect(subject.hours?).to be_true
+      expect(subject.hours?).to be(true)
     end
 
     it "returns the #minutes" do
@@ -193,7 +193,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns true for #minutes?" do
-      expect(subject.minutes?).to be_true
+      expect(subject.minutes?).to be(true)
     end
 
     it "returns a default formatted #to_s" do
@@ -225,7 +225,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns true for #minutes?" do
-      expect(subject.minutes?).to be_true
+      expect(subject.minutes?).to be(true)
     end
 
     it "returns a default formatted #to_s" do

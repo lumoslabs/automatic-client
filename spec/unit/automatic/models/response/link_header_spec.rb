@@ -14,7 +14,7 @@ describe Automatic::Models::Response::LinkHeader do
     end
 
     it "returns true for #links?" do
-      expect(subject.links?).to be_true
+      expect(subject.links?).to be(true)
     end
   end
 

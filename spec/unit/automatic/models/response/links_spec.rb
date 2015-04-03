@@ -27,7 +27,7 @@ describe Automatic::Models::Response::Links do
     end
 
     it "returns true for #any?" do
-      expect(subject.any?).to be_true
+      expect(subject.any?).to be(true)
     end
   end
 
@@ -39,7 +39,7 @@ describe Automatic::Models::Response::Links do
     end
 
     it "returns true for #any?" do
-      expect(subject.any?).to be_true
+      expect(subject.any?).to be(true)
     end
   end
 
@@ -55,7 +55,7 @@ describe Automatic::Models::Response::Links do
     end
 
     it "returns true for #previous?" do
-      expect(subject.previous?).to be_true
+      expect(subject.previous?).to be(true)
     end
   end
 
@@ -71,7 +71,7 @@ describe Automatic::Models::Response::Links do
     end
 
     it "returns true for #next?" do
-      expect(subject.next?).to be_true
+      expect(subject.next?).to be(true)
     end
   end
 
@@ -87,7 +87,7 @@ describe Automatic::Models::Response::Links do
     end
 
     it "returns true for #first_page?" do
-      expect(subject.first_page?).to be_true
+      expect(subject.first_page?).to be(true)
     end
   end
 
@@ -103,7 +103,7 @@ describe Automatic::Models::Response::Links do
     end
 
     it "returns true for #last_page?" do
-      expect(subject.last_page?).to be_true
+      expect(subject.last_page?).to be(true)
     end
   end
 end
