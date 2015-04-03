@@ -15,6 +15,10 @@ describe Automatic::Core::Webhook do
     expect(subject.name).to eq('trip:finished')
   end
 
+  it "returns the #type" do
+    expect(subject.type).to eq('finished')
+  end
+
   it "returns the #description" do
     expect(subject.description).to eq('Sent after a trip is completed and processed by Automatic.')
   end
