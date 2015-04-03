@@ -1,5 +1,5 @@
 module Automatic
-  module Client
+  module Models
     class Trips
       UnauthorizedError = Class.new(StandardError)
 
@@ -23,10 +23,10 @@ module Automatic
 
         case(response.status)
         when 200
-          Automatic::Client::Trip.new(json_body)
+          Automatic::Models::Trip.new(json_body)
         else
           json_body.merge!('status' => response.status, 'message' => json_body['detail'])
-          error = Automatic::Client::Error.new(json_body)
+          error = Automatic::Models::Error.new(json_body)
 
           raise StandardError.new(error.full_message)
         end
@@ -55,7 +55,7 @@ module Automatic
         when 200
           raw_trips = []
 
-          link_header = Automatic::Client::Response::LinkHeader.new(response.headers['Link'])
+          link_header = Automatic::Models::Response::LinkHeader.new(response.headers['Link'])
           links       = link_header.links
 
           raw_trips.concat(json_body.fetch('results', []))
@@ -66,7 +66,7 @@ module Automatic
               response  = request
               json_body = MultiJson.load(response.body)
 
-              link_header = Automatic::Client::Response::LinkHeader.new(response.headers['Link'])
+              link_header = Automatic::Models::Response::LinkHeader.new(response.headers['Link'])
               links       = link_header.links
 
               raw_trips.concat(json_body.fetch('results', []))
@@ -78,12 +78,12 @@ module Automatic
           self.new(raw_trips)
         when 403
           json_body.merge!('status' => 403)
-          error = Automatic::Client::Error.new(json_body)
+          error = Automatic::Models::Error.new(json_body)
 
           raise UnauthorizedError.new(error.full_message)
         else
           json_body.merge!('status' => response.status)
-          error = Automatic::Client::Error.new(json_body)
+          error = Automatic::Models::Error.new(json_body)
 
           raise StandardError.new(error.full_message)
         end
