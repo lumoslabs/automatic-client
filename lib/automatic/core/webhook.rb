@@ -9,6 +9,10 @@ module Automatic
         @attributes.fetch('name', nil)
       end
 
+      def type
+        self.name.split(':', 2).last
+      end
+
       def description
         @attributes.fetch('description', nil)
       end
