@@ -21,7 +21,7 @@ describe Automatic::Models::Vehicles do
     end
 
     it "returns false for #any?" do
-      expect(subject.any?).to be_false
+      expect(subject.any?).to be(false)
     end
   end
 

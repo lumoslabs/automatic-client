@@ -33,7 +33,7 @@ describe Automatic::Models::Response::Metadata do
     end
 
     it "returns false for #any?" do
-      expect(subject.any?).to be_false
+      expect(subject.any?).to be(false)
     end
   end
 
@@ -58,7 +58,7 @@ describe Automatic::Models::Response::Metadata do
       end
 
       it "returns false for #next?" do
-        expect(subject.next?).to be_false
+        expect(subject.next?).to be(false)
       end
     end
   end
@@ -84,7 +84,7 @@ describe Automatic::Models::Response::Metadata do
       end
 
       it "returns false for #previous?" do
-        expect(subject.previous?).to be_false
+        expect(subject.previous?).to be(false)
       end
     end
   end

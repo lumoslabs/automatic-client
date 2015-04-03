@@ -24,7 +24,7 @@ describe Automatic::Models::Response::Link do
     end
 
     it "returns false for #previous?" do
-      expect(subject.previous?).to be_false
+      expect(subject.previous?).to be(false)
     end
 
     describe "#next?" do
@@ -34,7 +34,7 @@ describe Automatic::Models::Response::Link do
 
       it "returns false if this is not a next link" do
         attributes[:rel] = 'previous'
-        expect(subject.next?).to be_false
+        expect(subject.next?).to be(false)
       end
     end
 
@@ -45,7 +45,7 @@ describe Automatic::Models::Response::Link do
       end
 
       it "returns false if this is not a previous link" do
-        expect(subject.previous?).to be_false
+        expect(subject.previous?).to be(false)
       end
     end
 
@@ -56,7 +56,7 @@ describe Automatic::Models::Response::Link do
       end
 
       it "returns false if this is not a last link" do
-        expect(subject.last?).to be_false
+        expect(subject.last?).to be(false)
       end
     end
 
@@ -67,7 +67,7 @@ describe Automatic::Models::Response::Link do
       end
 
       it "returns false if this is not a first link" do
-        expect(subject.first?).to be_false
+        expect(subject.first?).to be(false)
       end
     end
   end

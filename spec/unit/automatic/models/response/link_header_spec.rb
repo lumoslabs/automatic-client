@@ -26,7 +26,7 @@ describe Automatic::Models::Response::LinkHeader do
     end
 
     it "returns false for #links?" do
-      expect(subject.links?).to be_false
+      expect(subject.links?).to be(false)
     end
   end
 

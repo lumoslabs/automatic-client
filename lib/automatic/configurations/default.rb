@@ -71,10 +71,11 @@ module Automatic
                           true
                         when 'false'
                           false
+                        when nil
+                          false
                         else
                           auto_paginate_value
                         end
-
 
         auto_paginate
       end

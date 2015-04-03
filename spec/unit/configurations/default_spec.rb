@@ -38,7 +38,7 @@ describe Automatic::Configurations::Default do
     end
 
     it "returns false for #auto_paginate" do
-      expect(described_class.auto_paginate).to be_false
+      expect(described_class.auto_paginate).to be(false)
     end
 
     it "returns a logger for the #request_logger" do
@@ -105,7 +105,7 @@ describe Automatic::Configurations::Default do
     end
 
     it "returns false for #auto_paginate" do
-      expect(described_class.auto_paginate).to be_false
+      expect(described_class.auto_paginate).to be(false)
     end
 
     it "returns nil for the #request_logger" do

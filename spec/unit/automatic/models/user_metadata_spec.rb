@@ -43,11 +43,11 @@ describe Automatic::Models::UserMetadata do
     end
 
     it "returns false for #is_latest_app_version" do
-      expect(subject.is_latest_app_version).to be_false
+      expect(subject.is_latest_app_version).to be(false)
     end
 
     it "returns an alias for #latest_app_version?" do
-      expect(subject.latest_app_version?).to be_false
+      expect(subject.latest_app_version?).to be(false)
     end
   end
 end

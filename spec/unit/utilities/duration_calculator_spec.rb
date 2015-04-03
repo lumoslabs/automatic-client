@@ -14,7 +14,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns false for #days?" do
-        expect(subject.days?).to be_false
+        expect(subject.days?).to be(false)
       end
 
       it "returns 0 for the #hours" do
@@ -22,7 +22,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns false for #hours?" do
-        expect(subject.hours?).to be_false
+        expect(subject.hours?).to be(false)
       end
 
       it "returns 0 for the #minutes" do
@@ -30,7 +30,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns false for #minutes?" do
-        expect(subject.minutes?).to be_false
+        expect(subject.minutes?).to be(false)
       end
 
       it "returns the #seconds" do
@@ -50,7 +50,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns false for #days?" do
-        expect(subject.days?).to be_false
+        expect(subject.days?).to be(false)
       end
 
       it "returns 0 for the #hours" do
@@ -58,7 +58,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns false for #hours?" do
-        expect(subject.hours?).to be_false
+        expect(subject.hours?).to be(false)
       end
 
       it "returns the #minutes" do
@@ -82,7 +82,7 @@ describe Automatic::Utilities::DurationCalculator do
       end
 
       it "returns false for #days?" do
-        expect(subject.days?).to be_false
+        expect(subject.days?).to be(false)
       end
 
       it "returns the #hours" do
@@ -177,7 +177,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns false for #days?" do
-      expect(subject.days?).to be_false
+      expect(subject.days?).to be(false)
     end
 
     it "returns the #hours" do
@@ -209,7 +209,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns false for #days?" do
-      expect(subject.days?).to be_false
+      expect(subject.days?).to be(false)
     end
 
     it "returns 0 for the #hours" do
@@ -217,7 +217,7 @@ describe Automatic::Utilities::DurationCalculator do
     end
 
     it "returns false for #hours?" do
-      expect(subject.hours?).to be_false
+      expect(subject.hours?).to be(false)
     end
 
     it "returns the #minutes" do
