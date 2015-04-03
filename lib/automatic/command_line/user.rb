@@ -11,7 +11,7 @@ module Automatic
       def show
         puts "\n"
 
-        users = [Automatic::Client::Users.find_by_id(options[:id])]
+        users = [Automatic::Models::Users.find_by_id(options[:id])]
 
         if users.any?
           vehicle_row = ->(index,record) do

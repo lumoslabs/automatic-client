@@ -12,7 +12,7 @@ module Automatic
       def show
         puts "\n"
 
-        trips = [Automatic::Client::Trips.find_by_id(options[:id])]
+        trips = [Automatic::Models::Trips.find_by_id(options[:id])]
 
         if trips.any?
           date_format = "%B %d %Y @ %I:%M%P"

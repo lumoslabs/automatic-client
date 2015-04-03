@@ -60,7 +60,7 @@ module Automatic
           default_options.merge!(started_at__gte: Time.parse(started_at__gte).to_i)
         end
 
-        trips = Automatic::Client::Trips.all(default_options)
+        trips = Automatic::Models::Trips.all(default_options)
 
         if trips.any?
           default_filename = "trips-%s.csv" % [Time.now.utc.to_i]
@@ -139,7 +139,7 @@ module Automatic
           default_options.merge!(started_at__gte: Time.parse(started_at__gte).to_i)
         end
 
-        trips = Automatic::Client::Trips.all(default_options)
+        trips = Automatic::Models::Trips.all(default_options)
 
         if trips.any?
           date_format = "%B %d %Y @ %I:%M %P"

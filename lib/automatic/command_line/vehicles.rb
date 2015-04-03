@@ -10,7 +10,7 @@ module Automatic
       def all
         puts "\n"
 
-        vehicles = Automatic::Client::Vehicles.all
+        vehicles = Automatic::Models::Vehicles.all
 
         if vehicles.any?
           vehicle_row = ->(index,record) do
