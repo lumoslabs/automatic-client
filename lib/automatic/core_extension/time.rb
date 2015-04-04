@@ -16,7 +16,7 @@ module Automatic
 
         zone_object = TZInfo::Timezone.get(timezone)
         time_period = zone_object.period_for_utc(self)
-        (self + time_period.utc_offset)
+        zone_object.utc_to_local(self)
       end
     end
   end
