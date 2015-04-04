@@ -13,12 +13,12 @@ describe Automatic::CoreExtension::Time do
   describe "#in_zone" do
     it "returns the time in specified timezone" do
       timestamp = Time.parse("2013-11-02 23:14:10 -0400")
-      expected  = Time.parse("2013-11-02 15:14:10 -0400")
+      expected  = Time.parse("2013-11-02 16:14:10 UTC")
       expect(timestamp.extend(described_class).in_zone('America/Los_Angeles')).to eq(expected)
     end
 
     it "returns the time in UTC by default" do
-      timestamp = Time.parse("2013-11-02 23:14:10 -0400")
+      timestamp = Time.parse("2013-11-02 23:14:10 UTC")
       expected  = timestamp
       expect(timestamp.extend(described_class).in_zone).to eq(expected)
     end

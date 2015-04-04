@@ -65,7 +65,7 @@ describe Automatic::Models::Trip do
     end
 
     it "returns the #end_at" do
-      expected = Time.parse('2015-03-08 06:22:40 UTC')
+      expected = Time.parse('2015-03-08 07:22:40 UTC')
       expect(subject.end_at.to_s).to eq(expected.to_s)
     end
 
@@ -74,7 +74,7 @@ describe Automatic::Models::Trip do
     end
 
     it "returns the #start_at" do
-      expected = Time.parse('2015-03-08 05:54:25 UTC')
+      expected = Time.parse('2015-03-08 06:54:25 UTC')
       expect(subject.start_at.to_s).to eq(expected.to_s)
     end
 
