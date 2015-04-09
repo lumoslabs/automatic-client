@@ -33,6 +33,12 @@ describe Automatic::Utilities::StatusCodeMapper do
       expected_count = (200...300).to_a.count
       expect(described_class.new(:success, 200).codes.count).to eq(expected_count)
     end
+
+    it "returns the distinct union of two maps" do
+      expected = (400...600).to_a
+
+      expect(described_class.new(:failure, :server_error).codes).to eq(expected)
+    end
   end
 
   context "inclusion" do

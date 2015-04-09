@@ -32,10 +32,10 @@ module Automatic
           else
             collection.concat([status.to_i])
           end
-          collection.uniq
+          collection
         end
 
-        all_codes
+        Set.new(all_codes).to_a
       end
 
       # Checks to see if the codes includes a specific code
