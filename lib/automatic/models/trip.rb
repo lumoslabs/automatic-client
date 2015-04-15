@@ -173,11 +173,13 @@ module Automatic
       end
 
       def start_address_params
-        @attributes.fetch('start_address', {})
+        params = @attributes['start_address']
+        if params.nil? then {} else params end
       end
 
       def end_address_params
-        @attributes.fetch('end_address', {})
+        params = @attributes['end_address']
+        if params.nil? then {} else params end
       end
 
       def start_location_params

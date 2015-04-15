@@ -27,8 +27,18 @@ describe Automatic::Models::Trip do
         expect(subject.start_address).to be_a(Automatic::Models::Address)
       end
 
+      it "returns an empty address name if #start_address is null" do
+        trip['start_address'] = nil
+        expect(subject.start_address.name).to be(nil)
+      end
+
       it "returns an Address object for #end_address" do
         expect(subject.start_address).to be_a(Automatic::Models::Address)
+      end
+
+      it "returns an empty address name if #end_address is null" do
+        trip['end_address'] = nil
+        expect(subject.end_address.name).to be(nil)
       end
 
       it "returns a Polyline object for #polyline" do
