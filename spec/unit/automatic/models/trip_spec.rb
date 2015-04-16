@@ -100,6 +100,18 @@ describe Automatic::Models::Trip do
       expect(subject.idling_time_s).to eq(430)
     end
 
+    it "returns the #driving_time" do
+      expect(subject.driving_time).to eq(1264.2)
+    end
+
+    it "returns the #average_driving_time as a percent" do
+      expect(subject.average_driving_time).to eq(74.61928934010153)
+    end
+
+    it "returns the #average_idling_time as a percent" do
+      expect(subject.average_idling_time).to eq(25.380710659898476)
+    end
+
     it "returns the #path encoded polyline" do
       expected = "{xoeFlkjjVmOhBsA_ToEir@gDch@sAgSi@cIi@qI~IgAn@w@DEKMMOCOAEeAyAcDqEwEmG]c@g@YuCyD@I@IpAiBlAaBpAkBcHuJeGiIgFeHgTyYWa@DG"
       expect(subject.path).to eq(expected)
