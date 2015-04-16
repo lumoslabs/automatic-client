@@ -25,6 +25,10 @@ module Automatic
           case(record['type'])
           when 'speeding'
             Automatic::Models::VehicleEvent::NotificationSpeeding.new(record)
+          when 'hard_accel'
+            Automatic::Models::VehicleEvent::NotificationHardAccel.new(record)
+          when 'hard_brake'
+            Automatic::Models::VehicleEvent::NotificationHardBrake.new(record)
           else
             OpenStruct.new(record)
           end
