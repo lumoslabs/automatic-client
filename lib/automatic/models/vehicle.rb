@@ -24,6 +24,15 @@ module Automatic
         @attributes.fetch('url', nil)
       end
 
+      # Returns the VIN of the vehicle
+      #
+      # @note Only applicable with scope:vin
+      #
+      # @return [String]
+      def vin
+        @attributes.fetch('vin', nil)
+      end
+
       # Returns the year of the Vehicle
       #
       # @return [String]
@@ -48,9 +57,10 @@ module Automatic
       # Returns the sub model of the Vehicle
       #
       # @return [String]
-      def sub_model
+      def submodel
         @attributes.fetch('submodel', nil)
       end
+      alias :sub_model :submodel
 
       # Returns the color of the Vehicle
       #

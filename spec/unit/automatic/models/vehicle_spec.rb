@@ -22,6 +22,11 @@ describe Automatic::Models::Vehicle do
       expect(subject.url).to eq('https://api.automatic.com/v1/vehicles/529e5772e4b00a2ddb562f1f')
     end
 
+    # NOTE: only applicable with available scopes
+    it "returns the #vin" do
+      expect(subject.vin).to eq('1234')
+    end
+
     it "returns the #year" do
       expect(subject.year).to eq(2001)
     end
