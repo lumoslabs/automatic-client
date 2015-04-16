@@ -24,14 +24,21 @@ module Automatic
         #
         # @return [String]
         def start_distance_m
-          @attributes.fetch('start_distance_m', nil)
+          @attributes.fetch('start_distance_m', nil).to_f
         end
 
         # Return the end distance in meters
         #
         # @return [String]
         def end_distance_m
-          @attributes.fetch('end_distance_m', nil)
+          @attributes.fetch('end_distance_m', nil).to_f
+        end
+
+        # Returns the total distance covered by the event
+        #
+        # @return [Float]
+        def total_distance_m
+          (self.end_distance_m - self.start_distance_m)
         end
 
         # Returns the veolcity kilometers per hour
