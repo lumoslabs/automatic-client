@@ -1,6 +1,8 @@
 module Automatic
   module Models
     class Trip
+      include Comparable
+
       # Create an instance of the Trip domain model
       #
       # @param attributes [Hash] Automatic Trip Definition
@@ -15,6 +17,13 @@ module Automatic
       # @return [String]
       def id
         @attributes.fetch('id', nil)
+      end
+
+      # Implement Comparable for extended Enumerable support
+      #
+      # @return [Array]
+      def <=>(other)
+        self.start_at <=> other.start_at
       end
 
       # Returns the URL of the record
@@ -156,6 +165,7 @@ module Automatic
       def hard_accels
         @attributes.fetch('hard_accels', 0)
       end
+      alias :hard_accels_count :hard_accels
 
       # Returns the counter cache of HardBrake events. This
       # should match up to VehicleEvents counts.
@@ -168,6 +178,7 @@ module Automatic
       def hard_brakes
         @attributes.fetch('hard_brakes', 0)
       end
+      alias :hard_brakes_count :hard_brakes
 
       # Return the duration of the trip over 80 in seconds
       #
@@ -261,6 +272,31 @@ module Automatic
       # @return [Integer] Seconds of idle time
       def idling_time_s
         @attributes.fetch('idling_time_s', 0).to_i
+      end
+      alias :idling_time :idling_time_s
+
+      # Returns the total time spent driving. This is the
+      # total duration minus the amount of idling time.
+      #
+      # @return [Float]
+      def driving_time
+        (self.duration - self.idling_time)
+      end
+
+      # Returns the average time of this trip that
+      # was spend in motion.
+      #
+      # @return [Float]
+      def average_driving_time
+        ((self.driving_time / self.duration) * 100)
+      end
+
+      # Returns the average time of this trip that
+      # was spend idling.
+      #
+      # @return [Float]
+      def average_idling_time
+        ((self.idling_time / self.duration) * 100)
       end
 
       # Returns a VehicleEvents instance that captures
