@@ -5,7 +5,7 @@ module Automatic
   class UriProxy < SimpleDelegator
     # Create a new UriProxy model
     #
-    # @paran url [String]
+    # @param url [String]
     #
     # @return [Automatic::UriProxy] Delegatory to Ruby URI
     def initialize(url)

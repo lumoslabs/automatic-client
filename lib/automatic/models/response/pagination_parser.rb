@@ -6,7 +6,7 @@ module Automatic
       class PaginationParser
         # Create a PaginationParser instance
         #
-        # @param url [String] URL to extract pagination from
+        # @param uri [String] URI to extract pagination from
         #
         # @return [Automatic::Models::Response::PaginationParser]
         def initialize(uri)

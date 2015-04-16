@@ -29,7 +29,7 @@ module Automatic
       # @param id [String] The Automatic User ID
       # @param options [Hash] HTTP Query String Parameters
       #
-      # @rase [RecordNotFoundError] if no User can be found
+      # @raise [RecordNotFoundError] if no User can be found
       #
       # @return [Automatic::Models::User] Automatic User Model
       def self.find_by_id!(id, options={})
