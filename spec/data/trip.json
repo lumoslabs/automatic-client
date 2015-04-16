@@ -43,13 +43,11 @@
   "duration_over_80_s": 0,
   "duration_over_75_s": 2,
   "duration_over_70_s": 3,
-  "score_a": 44,
-  "score_b": 56,
+  "score_events": 44,
+  "score_speeding": 56,
   "vehicle_events": [],
   "fuel_cost_usd": 1.0428111627932486,
   "fuel_volume_l": 0.2465857561582522,
   "average_kmpl": 16.56434586845349,
-  "city_fraction": 0.41,
-  "highway_fraction": 0.59,
-  "night_driving_fraction": 0.33
+  "idling_time_s": 430
 }
