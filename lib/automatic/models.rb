@@ -10,6 +10,9 @@ require "automatic/models/trip"
 require "automatic/models/tags"
 require "automatic/models/tag"
 
+require "automatic/models/taggings"
+require "automatic/models/tagging"
+
 require "automatic/models/vehicles"
 require "automatic/models/vehicle"
 

@@ -19,6 +19,15 @@ module Automatic
         internal_collection.each(&block)
       end
 
+      # Find a tag by a given name
+      #
+      # @note We want to return an array proxy here
+      #
+      # @return [Array]
+      def find_by_tag(name)
+        self.select { |record| record.name == name.to_s }.first
+      end
+
       private
       def internal_collection
         @collection.map { |record| Tag.new(record) }
