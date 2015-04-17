@@ -34,6 +34,10 @@ describe Automatic::Models::VehicleEvent::NotificationSpeeding do
       expect(subject.velocity_kph).to eq(112.65)
     end
 
+    it "returns the #velocity in miles per hour" do
+      expect(subject.velocity_mph).to eq(69.99744315000001)
+    end
+
     it "returns the #started_at stamp" do
       expected = DateTime.parse(attributes['started_at'])
       expect(subject.started_at).to eq(expected)

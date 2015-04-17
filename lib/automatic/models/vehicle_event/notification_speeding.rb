@@ -43,9 +43,18 @@ module Automatic
 
         # Returns the veolcity kilometers per hour
         #
-        # @return [String]
+        # @return [Float]
         def velocity_kph
           @attributes.fetch('velocity_kph', nil)
+        end
+
+        # Returns the velocity miles per hour
+        #
+        # @todo wrap with a distance conversion utility
+        #
+        # @return [Float]
+        def velocity_mph
+          (self.velocity_kph * 0.621371)
         end
 
         # Returns the type of the event
