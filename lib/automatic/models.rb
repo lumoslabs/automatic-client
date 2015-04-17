@@ -7,6 +7,9 @@ require "automatic/models/response"
 require "automatic/models/trips"
 require "automatic/models/trip"
 
+require "automatic/models/tags"
+require "automatic/models/tag"
+
 require "automatic/models/vehicles"
 require "automatic/models/vehicle"
 
