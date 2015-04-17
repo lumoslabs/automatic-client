@@ -48,6 +48,10 @@ describe Automatic::Models::Trip do
       it "returns an Events object for #events" do
         expect(subject.events).to be_a(Automatic::Models::VehicleEvents)
       end
+
+      it "returns a Tags object for #tags" do
+        expect(subject.tags).to be_a(Automatic::Models::Tags)
+      end
     end
 
     it "returns the #id" do

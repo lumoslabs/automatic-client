@@ -49,5 +49,8 @@
   "fuel_cost_usd": 1.0428111627932486,
   "fuel_volume_l": 0.2465857561582522,
   "average_kmpl": 16.56434586845349,
-  "idling_time_s": 430
+  "idling_time_s": 430,
+  "tags": [
+    "business"
+  ]
 }

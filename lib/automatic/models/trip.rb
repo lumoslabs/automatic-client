@@ -317,6 +317,35 @@ module Automatic
         self.events.any?
       end
 
+      # Returns a Tags instance from the trip tags
+      #
+      # @note This is subject to change as it would be
+      # better if it returned a collection of objects
+      # instead of an array.
+      #
+      # @return [Automatic::Models::Tags]
+      def tags
+        return @tags if @tags
+
+        tag_names = @attributes.fetch('tags', [])
+
+        tag_collection = tag_names.map do |label|
+          {
+            'tag' => label
+          }
+        end
+
+        @tags = Automatic::Models::Tags.new(tag_collection)
+        @tags
+      end
+
+      # Returns true if there are any tags for the trip
+      #
+      # @return [Boolean]
+      def tags?
+        self.tags.any?
+      end
+
       private
       def start_address_params
         params = @attributes['start_address']
