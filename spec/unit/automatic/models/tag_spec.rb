@@ -17,10 +17,5 @@ describe Automatic::Models::Tag do
     it "returns the #tag" do
       expect(subject.tag).to eq('business')
     end
-
-    it "returns the #created_at" do
-      expected = DateTime.parse(attributes['created_at'])
-      expect(subject.created_at).to eq(expected)
-    end
   end
 end

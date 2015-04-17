@@ -26,6 +26,7 @@ module Automatic
         @attributes.fetch('tag', nil)
       end
       alias :name :tag
+      alias :slug :tag
 
       # Returns the timestamp when the
       # tag was created.
