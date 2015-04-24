@@ -257,6 +257,22 @@ module Automatic
         internal_collection.each(&block)
       end
 
+      # Out of this collection, find all trips with a Tagging
+      # of business
+      #
+      # @return [Array]
+      def business
+        self.select(&:business?)
+      end
+
+      # Return true if there are any business related trips
+      # in this collection.
+      #
+      # @return [Boolean]
+      def business?
+        self.business.any?
+      end
+
       # -- STATISTICS
       # TODO: Move the below to statistics helpers
 

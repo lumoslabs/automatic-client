@@ -75,6 +75,7 @@ module Automatic
       def end_at
         end_time_before_zone.extend(Automatic::CoreExtension::Time).in_zone(self.end_time_zone)
       end
+      alias :ended_at :end_at
 
       # Returns the timezone of the end destination
       #
@@ -103,6 +104,7 @@ module Automatic
       def start_at
         start_time_before_zone.extend(Automatic::CoreExtension::Time).in_zone(self.start_time_zone)
       end
+      alias :started_at :start_at
 
       # Returns the timezone of the start destination
       #
@@ -111,7 +113,7 @@ module Automatic
         @attributes.fetch('start_timezone', nil)
       end
 
-      # Return the elapsed time of the Trip in minutes
+      # Return the elapsed time of the Trip in seconds
       #
       # @todo Take down to seconds and support (seconds, minutes, hours)
       # @todo Create a helper extension that will be smart and know seconds and minutes
@@ -121,6 +123,16 @@ module Automatic
         @attributes.fetch('duration_s', 0).to_f
       end
       alias :elapsed_time :duration
+      alias :seconds_driven :duration
+
+      # Returns the total minutes driven
+      #
+      # @note This is temporary until a conversion object is built
+      #
+      # @return [Float]
+      def minutes_duration
+        (self.duration / 60).to_f
+      end
 
       # This returns the Endcoded Polyline path.
       #
@@ -163,9 +175,16 @@ module Automatic
       #
       # @return [Integer]
       def hard_accels
-        @attributes.fetch('hard_accels', 0)
+        @attributes.fetch('hard_accels', 0).to_i
       end
       alias :hard_accels_count :hard_accels
+
+      # Returns true if there are hard accels
+      #
+      # @return [Boolean]
+      def hard_accels?
+        self.hard_accels > 0
+      end
 
       # Returns the counter cache of HardBrake events. This
       # should match up to VehicleEvents counts.
@@ -176,9 +195,16 @@ module Automatic
       #
       # @return [Integer]
       def hard_brakes
-        @attributes.fetch('hard_brakes', 0)
+        @attributes.fetch('hard_brakes', 0).to_i
       end
       alias :hard_brakes_count :hard_brakes
+
+      # Returns true if there are hard brakes
+      #
+      # @return [Boolean]
+      def hard_brakes?
+        self.hard_brakes > 0
+      end
 
       # Return the duration of the trip over 80 in seconds
       #
@@ -187,9 +213,34 @@ module Automatic
       #
       # @return [Integer]
       def duration_over_80_s
-        @attributes.fetch('duration_over_80_s', 0)
+        @attributes.fetch('duration_over_80_s', 0).to_i
       end
       alias :duration_over_80 :duration_over_80_s
+
+      # Return true if there is any duration (seconds) over 80
+      #
+      # @note Temporary until we have a conversion object
+      #
+      # @return [Boolean]
+      def duration_over_80?
+        self.duration_over_80 > 0
+      end
+
+      # Return the duration of the trip over 80 in minutes
+      #
+      # @note This will be moved to a conversion object
+      #
+      # @return [Integer]
+      def minutes_over_80
+        (self.duration_over_80 / 60).ceil
+      end
+
+      # Returns true if there is any duration (minutes) over 80
+      #
+      # @return [Integer]
+      def minutes_over_80?
+        self.minutes_over_80 > 0
+      end
 
       # Return the duration of the trip over 75 in seconds
       #
@@ -198,9 +249,34 @@ module Automatic
       #
       # @return [Integer]
       def duration_over_75_s
-        @attributes.fetch('duration_over_75_s', 0)
+        @attributes.fetch('duration_over_75_s', 0).to_i
       end
       alias :duration_over_75 :duration_over_75_s
+
+      # Return true if there is any duration (seconds) over 75
+      #
+      # @note Temporary until we have a conversion object
+      #
+      # @return [Boolean]
+      def duration_over_75?
+        self.duration_over_75 > 0
+      end
+
+      # Return the duration of the trip over 75 in minutes
+      #
+      # @note This will be moved to a conversion object
+      #
+      # @return [Integer]
+      def minutes_over_75
+        (self.duration_over_75 / 60).to_i
+      end
+
+      # Returns true if there is any duration (minutes) over 75
+      #
+      # @return [Integer]
+      def minutes_over_75?
+        self.minutes_over_75 > 0
+      end
 
       # Return the duration of the trip over 70 in seconds
       #
@@ -209,9 +285,34 @@ module Automatic
       #
       # @return [Integer]
       def duration_over_70_s
-        @attributes.fetch('duration_over_70_s', 0)
+        @attributes.fetch('duration_over_70_s', 0).to_i
       end
       alias :duration_over_70 :duration_over_70_s
+
+      # Return true if there is any duration (seconds) over 70
+      #
+      # @note Temporary until we have a conversion object
+      #
+      # @return [Boolean]
+      def duration_over_70?
+        self.duration_over_70 > 0
+      end
+
+      # Return the duration of the trip over 70 in minutes
+      #
+      # @note This will be moved to a conversion object
+      #
+      # @return [Integer]
+      def minutes_over_70
+        (self.duration_over_70 / 60).to_i
+      end
+
+      # Returns true if there is any duration (minutes) over 70
+      #
+      # @return [Integer]
+      def minutes_over_70?
+        self.minutes_over_70 > 0
+      end
 
       # Returns the score for event
       #
@@ -317,13 +418,14 @@ module Automatic
         self.events.any?
       end
 
-      # Returns a Tags instance from the trip tags
+      # Returns a Tags instance from the trip tags. This is
+      # a cross section of this Trip and a core Tag model.
       #
       # @note This is subject to change as it would be
       # better if it returned a collection of objects
       # instead of an array.
       #
-      # @return [Automatic::Models::Tags]
+      # @return [Automatic::Models::Taggings]
       def tags
         return @tags if @tags
 
@@ -335,7 +437,7 @@ module Automatic
           }
         end
 
-        @tags = Automatic::Models::Tags.new(tag_collection)
+        @tags = Automatic::Models::Taggings.new(tag_collection)
         @tags
       end
 
@@ -344,6 +446,14 @@ module Automatic
       # @return [Boolean]
       def tags?
         self.tags.any?
+      end
+
+      # Helper method to determine if this trip was tagged
+      # as business
+      #
+      # @return [Boolean]
+      def business?
+        self.tags? && self.tags.business?
       end
 
       private
