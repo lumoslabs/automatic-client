@@ -132,6 +132,9 @@ module Automatic
       Automatic::Response.new(request)
     end
 
+    # Returns the defined set of scopes from Automatic
+    #
+    # @return [Automatic::Core::Scopes] Collection of Scope Domain Models
     def self.scopes
       return @scopes if @scopes
 
@@ -142,6 +145,9 @@ module Automatic
       @scopes
     end
 
+    # Returns the defined set of webhooks from Automatic
+    #
+    # @return [Automatic::Core::Webhooks] Collection of Webhook Domain Models
     def self.webhooks
       return @webhooks if @webhooks
 
@@ -152,6 +158,12 @@ module Automatic
       @webhooks
     end
 
+    # Return the defined set of Error responses from Automatic
+    #
+    # @note These should be returned in the body, but are useful
+    # if you want to map with status codes
+    #
+    # @return [Automatic::Core::Errors] Collection of Error Domain Models
     def self.errors
       return @errors if @errors
 
@@ -162,6 +174,11 @@ module Automatic
       @errors
     end
 
+    # Return the defined set of Route objects from Automatic. This
+    # includes all supported URI and URI Templates to access the functionality
+    # of the Automatic API.
+    #
+    # @return [RestlessRouter::Routes] Collection of RestlessRouter Models
     def self.routes
       return @routes if @routes
 
