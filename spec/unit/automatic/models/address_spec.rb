@@ -19,7 +19,11 @@ describe Automatic::Models::Address do
     end
 
     it "returns the #display_name" do
-      expect(subject.display_name).to eq('1234 South Street, Somewhere, CA')
+      expect(subject.display_name).to eq('South Street, Somewhere, CA')
+    end
+
+    it "returns the #short_name" do
+      expect(subject.short_name).to eq('1234 South Street, Somewhere, CA')
     end
 
     it "returns the #street_number" do

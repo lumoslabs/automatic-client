@@ -30,6 +30,14 @@ module Automatic
         @attributes.fetch('display_name', nil)
       end
 
+      # Returns the short name of the address. This includes
+      # the street number, street name, city, and state
+      #
+      # @return [String]
+      def short_name
+        "%s %s, %s, %s" % [self.street_number, self.street_name, self.city, self.state]
+      end
+
       # Returns the street number
       #
       # @return [String]
