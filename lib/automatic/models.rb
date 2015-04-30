@@ -19,6 +19,8 @@ require "automatic/models/vehicle"
 require "automatic/models/vehicle_events"
 require "automatic/models/vehicle_event"
 
+require "automatic/models/webhook"
+
 require "automatic/models/users"
 require "automatic/models/user"
 
