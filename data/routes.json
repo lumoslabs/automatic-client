@@ -76,5 +76,17 @@
     "path": "/tag/{slug}/",
     "rel": "tag",
     "templated": true
+  },
+  {
+    "name": "Devices",
+    "path": "/device/{?page,limit,device_barcode}",
+    "rel": "devices",
+    "templated": true
+  },
+  {
+    "name": "Device Detail",
+    "path": "/device/{id}/",
+    "rel": "device",
+    "templated": true
   }
 ]
