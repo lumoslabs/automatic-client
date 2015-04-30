@@ -3,6 +3,8 @@ require File.expand_path('../webhook/vehicle', __FILE__)
 require File.expand_path('../webhook/user', __FILE__)
 require File.expand_path('../webhook/button', __FILE__)
 require File.expand_path('../webhook/region', __FILE__)
+require File.expand_path('../webhook/trip', __FILE__)
+require File.expand_path('../webhook/location', __FILE__)
 
 require File.expand_path('../webhook/diagnostic_trouble_codes', __FILE__)
 require File.expand_path('../webhook/diagnostic_trouble_code', __FILE__)
@@ -18,6 +20,7 @@ require File.expand_path('../webhook/hmi_interaction', __FILE__)
 require File.expand_path('../webhook/mil_on', __FILE__)
 require File.expand_path('../webhook/mil_off', __FILE__)
 require File.expand_path('../webhook/region_changed', __FILE__)
+require File.expand_path('../webhook/trip_finished', __FILE__)
 
 module Automatic
   module Models

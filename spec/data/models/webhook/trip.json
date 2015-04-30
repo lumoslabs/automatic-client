@@ -1,0 +1,31 @@
+{
+  "id": "T_234325345",
+  "start_location": {
+    "name": "101 Park Drive Northwest, San Francisco, CA 94118, USA",
+    "display_name": "Park Dr NW, San Francisco, CA",
+    "lat": 39.345,
+    "lon": -11.34345,
+    "accuracy_m": 10
+  },
+  "end_location": {
+    "name": "102 Street Drive, San Francisco, CA 94118, USA",
+    "display_name": "Street Dr, San Francisco, CA",
+    "lat": 40.35345,
+    "lon": -41.23234,
+    "accuracy_m": 10
+  },
+  "start_time": 1430396616435,
+  "end_time": 1430397570998,
+  "start_time_zone": "America/New_York",
+  "end_time_zone": "America/New_York",
+  "path": "1234",
+  "distance_m": 16566.02734375,
+  "hard_accels": 0,
+  "hard_brakes": 0,
+  "duration_over80_s": 8,
+  "duration_over75_s": 7,
+  "duration_over70_s": 6,
+  "fuel_cost_usd": 0.9769523739814758,
+  "fuel_volume_gal": 0.3369963467121124,
+  "average_mpg": 30.5452938079834
+}
