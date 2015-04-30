@@ -9,7 +9,7 @@ module Automatic
         # @note We would like some more extended information, but
         # this will do for now
         #
-        # @params attributes [Hash] Model of the OPTIONS response
+        # @param attributes [Hash] Model of the OPTIONS response
         #
         # @return [Automatic::Response::Options]
         def initialize(attributes={})

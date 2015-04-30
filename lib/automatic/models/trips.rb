@@ -154,8 +154,8 @@ module Automatic
 
       # Core helper method to get trips between time range
       #
-      # @param start_date [Integer] UNIX Timestamp
-      # @param end_date [Integer] UNIX Timestamp
+      # @param start_timestamp [Integer] UNIX Timestamp
+      # @param end_timestamp [Integer] UNIX Timestamp
       # @param options [Hash] Additional Request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
