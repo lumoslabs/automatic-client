@@ -71,9 +71,9 @@ module Automatic
 
       # Returns the time the trip ended
       #
-      # @return [DateTime]
+      # @return [ActiveSupport::TimeWithZone]
       def end_at
-        end_time_before_zone.extend(Automatic::CoreExtension::Time).in_zone(self.end_time_zone)
+        end_time_before_zone.in_time_zone(self.end_time_zone)
       end
       alias :ended_at :end_at
 
@@ -101,9 +101,9 @@ module Automatic
 
       # Returns the time the trip started
       #
-      # @return [DateTime]
+      # @return [ActiveSupport::TimeWithZone]
       def start_at
-        start_time_before_zone.extend(Automatic::CoreExtension::Time).in_zone(self.start_time_zone)
+        start_time_before_zone.in_time_zone(self.start_time_zone)
       end
       alias :started_at :start_at
 
