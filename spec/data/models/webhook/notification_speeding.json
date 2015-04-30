@@ -1,0 +1,24 @@
+{
+  "id": "349857345897345",
+  "speed_mph": 83,
+  "user": {
+    "id": "3459458645645",
+    "v2_id": "U_345kj345hk43j5"
+  },
+  "type": "notification:speeding",
+  "location": {
+    "lat": 20.89457645,
+    "lon": -51.345345,
+    "accuracy_m": 10.0
+  },
+  "vehicle": {
+    "id": "C_345897349857",
+    "year": 2009,
+    "make": "Mazda",
+    "model": "3",
+    "display_name": "Mazda 3",
+    "color": "#596064"
+  },
+  "created_at": 1430400182,
+  "time_zone": "America/New_York"
+}
