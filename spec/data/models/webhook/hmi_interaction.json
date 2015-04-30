@@ -1,10 +1,14 @@
 {
   "id": "349857345897345",
+  "button": {
+    "id": "CB_PTT"
+  },
   "user": {
     "id": "3459458645645",
     "v2_id": "U_345kj345hk43j5"
   },
-  "type": "parking:changed",
+  "interaction": "press",
+  "type": "hmi:interaction",
   "location": {
     "lat": 20.89457645,
     "lon": -51.345345,
