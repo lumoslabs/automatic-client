@@ -83,6 +83,7 @@ module Automatic
       def end_time_zone
         @attributes.fetch('end_timezone', nil)
       end
+      alias :end_timezone :end_time_zone
 
       # Returns a Location model for the start location
       #
@@ -112,6 +113,7 @@ module Automatic
       def start_time_zone
         @attributes.fetch('start_timezone', nil)
       end
+      alias :start_timezone :start_time_zone
 
       # Return the elapsed time of the Trip in seconds
       #
