@@ -5,6 +5,7 @@ require File.expand_path('../webhook/user', __FILE__)
 # Event models
 require File.expand_path('../webhook/ignition_on', __FILE__)
 require File.expand_path('../webhook/ignition_off', __FILE__)
+require File.expand_path('../webhook/notification_hard_accel', __FILE__)
 
 module Automatic
   module Models
