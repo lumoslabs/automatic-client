@@ -15,6 +15,7 @@ require File.expand_path('../webhook/notification_speeding', __FILE__)
 require File.expand_path('../webhook/parking_changed', __FILE__)
 require File.expand_path('../webhook/hmi_interaction', __FILE__)
 require File.expand_path('../webhook/mil_on', __FILE__)
+require File.expand_path('../webhook/mil_off', __FILE__)
 
 module Automatic
   module Models
