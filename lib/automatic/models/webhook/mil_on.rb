@@ -44,6 +44,7 @@ module Automatic
         def dtcs
           Automatic::Models::Webhook::DiagnosticTroubleCodes.new(@attributes.fetch('dtcs', []))
         end
+        alias :diagnostic_trouble_codes :dtcs
 
         # Returns an instance of the Webhook User model
         #
