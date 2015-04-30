@@ -4,6 +4,9 @@ require "automatic/models/polyline"
 
 require "automatic/models/response"
 
+require "automatic/models/client_applications"
+require "automatic/models/client_application"
+
 require "automatic/models/devices"
 require "automatic/models/device"
 

@@ -6,5 +6,9 @@
   "os_version": "7.0.6",
   "device_type": "iPad 2G",
   "phone_platform": "iOS",
-  "is_latest_app_version": false
+  "is_latest_app_version": false,
+  "authenticated_clients": [
+    "12354",
+    "abcde"
+  ]
 }

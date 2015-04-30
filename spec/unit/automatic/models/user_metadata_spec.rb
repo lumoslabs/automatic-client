@@ -14,6 +14,12 @@ describe Automatic::Models::UserMetadata do
   subject { described_class.new(attributes) }
 
   context "with all values" do
+    context "associations" do
+      it "returns a ClientApplications model for #authenticated_clients" do
+        expect(subject.authenticated_clients).to be_a(Automatic::Models::ClientApplications)
+      end
+    end
+
     it "returns the #url" do
       expect(subject.url).to eq('https://api.automatic.com/user/U_6sQPMSEW71FQ3H/metadata/')
     end
@@ -40,6 +46,10 @@ describe Automatic::Models::UserMetadata do
 
     it "returns the #phone_platform" do
       expect(subject.phone_platform).to eq('iOS')
+    end
+
+    it "returns true for #authenticated_clients?" do
+      expect(subject.authenticated_clients?).to be(true)
     end
 
     it "returns false for #is_latest_app_version" do

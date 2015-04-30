@@ -1,3 +1,5 @@
+require File.expand_path('../client_applications', __FILE__)
+
 module Automatic
   module Models
     class UserMetadata
@@ -70,6 +72,32 @@ module Automatic
         @attributes.fetch('is_latest_app_version', false)
       end
       alias :latest_app_version? :is_latest_app_version
+
+      # Return a collection of Authenticated Clients. These are
+      # Automatic Client Applications.
+      #
+      # @note This currently returns an array, and we want to ensure
+      # it's an object to iterate through.
+      #
+      # @return [Automatic::Models::ClientApplications]
+      def authenticated_clients
+        client_applications = []
+        @attributes.fetch('authenticated_clients', []).inject(client_applications) do |accum,app_id|
+          app_params = {
+            :id => app_id
+          }
+          accum.concat([app_params])
+        end
+
+        Automatic::Models::ClientApplications.new(client_applications)
+      end
+
+      # Returns true if the user has Authenticated Clients.
+      #
+      # @return [Boolean]
+      def authenticated_clients?
+        self.authenticated_clients.any?
+      end
     end
   end
 end
