@@ -1,17 +1,17 @@
 require File.expand_path('../../location', __FILE__)
 require File.expand_path('../user', __FILE__)
 require File.expand_path('../vehicle', __FILE__)
-require File.expand_path('../diagnostic_trouble_codes', __FILE__)
+require File.expand_path('../region', __FILE__)
 
 module Automatic
   module Models
     module Webhook
-      class MilOff
-        # Builds an instance of the MilOff webhook event
+      class RegionChanged
+        # Builds an instance of the RegionChanged webhook event
         #
         # @param attributes [Hash]
         #
-        # @return [Automatic::Models::Webhook::MilOff]
+        # @return [Automatic::Models::Webhook::RegionChanged]
         def initialize(attributes={})
           @attributes = attributes
         end
@@ -30,29 +30,19 @@ module Automatic
           @attributes['type']
         end
 
+        # Returns the region of the eveng
+        #
+        # @return [Automatic::Models::Webhook::Region]
+        def region
+          Automatic::Models::Webhook::Region.new(@attributes.fetch('region', {}))
+        end
+
         # Returns an instance of the core Location model
         #
         # @return [Automatic::Models::Location]
         def location
           Automatic::Models::Location.new(@attributes.fetch('location', {}))
         end
-
-        # Returns an instance of the Webhook DiagnosticTroubleCodes
-        # collection model
-        #
-        # @return [Automatic::Models::Webhook::DiagnosticTroubleCodes]
-        def dtcs
-          Automatic::Models::Webhook::DiagnosticTroubleCodes.new(@attributes.fetch('dtcs', []))
-        end
-        alias :diagnostic_trouble_codes :dtcs
-
-        # Returns true if the MIL event was cleared by the user
-        #
-        # @return [Boolean]
-        def user_cleared
-          @attributes['user_cleared']
-        end
-        alias :user_cleared? :user_cleared
 
         # Returns an instance of the Webhook User model
         #
