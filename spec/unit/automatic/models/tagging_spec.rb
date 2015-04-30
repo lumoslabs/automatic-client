@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Tagging do
   let(:tagging_file) do
-    File.read(File.expand_path('../../../../data/tagging.json', __FILE__))
+    File.read(File.expand_path('../../../../data/models/tagging.json', __FILE__))
   end
 
   let(:tagging) do

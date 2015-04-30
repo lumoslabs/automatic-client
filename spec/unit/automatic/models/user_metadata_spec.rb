@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::UserMetadata do
   let(:user_metadata_file) do
-    File.read(File.expand_path('../../../../data/user_metadata.json', __FILE__))
+    File.read(File.expand_path('../../../../data/models/user_metadata.json', __FILE__))
   end
 
   let(:user_metadata) do

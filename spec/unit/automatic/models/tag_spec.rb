@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Tag do
   let(:tag_file) do
-    File.read(File.expand_path('../../../../data/tag.json', __FILE__))
+    File.read(File.expand_path('../../../../data/models/tag.json', __FILE__))
   end
 
   let(:tag) do

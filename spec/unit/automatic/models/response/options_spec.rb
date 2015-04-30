@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Response::Options do
   let(:options_file) do
-    File.read(File.expand_path('../../../../../data/response/options.json', __FILE__))
+    File.read(File.expand_path('../../../../../data/models/response/options.json', __FILE__))
   end
 
   let(:options) do

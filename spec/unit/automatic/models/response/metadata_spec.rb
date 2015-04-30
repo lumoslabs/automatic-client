@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Response::Metadata do
   let(:metadata_file) do
-    File.read(File.expand_path('../../../../../data/_metadata.json', __FILE__))
+    File.read(File.expand_path('../../../../../data/models/response/_metadata.json', __FILE__))
   end
 
   let(:metadata) do

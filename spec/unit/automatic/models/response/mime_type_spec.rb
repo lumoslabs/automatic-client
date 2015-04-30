@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Response::MimeType do
   let(:mime_type_file) do
-    File.read(File.expand_path('../../../../../data/response/mime_type.json', __FILE__))
+    File.read(File.expand_path('../../../../../data/models/response/mime_type.json', __FILE__))
   end
 
   let(:mime_type) do

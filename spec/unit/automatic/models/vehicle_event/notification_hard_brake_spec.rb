@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::VehicleEvent::NotificationHardBrake do
   let(:event_file) do
-    File.read(File.expand_path('../../../../../data/vehicle_event/notification_hard_brake.json', __FILE__))
+    File.read(File.expand_path('../../../../../data/models/vehicle_event/notification_hard_brake.json', __FILE__))
   end
 
   let(:event) do

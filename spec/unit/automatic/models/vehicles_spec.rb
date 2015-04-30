@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Vehicles do
   let(:vehicle_file) do
-    File.read(File.expand_path('../../../../data/vehicle.json', __FILE__))
+    File.read(File.expand_path('../../../../data/models/vehicle.json', __FILE__))
   end
 
   let(:vehicle) do

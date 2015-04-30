@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Core::Webhook do
   let(:webhook_file) do
-    File.read(File.expand_path('../../../data/webhook.json', __FILE__))
+    File.read(File.expand_path('../../../data/core/webhook.json', __FILE__))
   end
 
   let(:webhook) do

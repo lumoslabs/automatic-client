@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Location do
   let(:location_file) do
-    File.read(File.expand_path('../../../../data/location.json', __FILE__))
+    File.read(File.expand_path('../../../../data/models/location.json', __FILE__))
   end
 
   let(:location) do

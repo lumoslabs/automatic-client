@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Trips do
   let(:trip_file) do
-    File.read(File.expand_path('../../../../data/trip.json', __FILE__))
+    File.read(File.expand_path('../../../../data/models/trip.json', __FILE__))
   end
 
   let(:trip) do

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Automatic::Models::Address do
   let(:address_file) do
-    File.read(File.expand_path('../../../../data/address.json', __FILE__))
+    File.read(File.expand_path('../../../../data/models/address.json', __FILE__))
   end
 
   let(:address) do
