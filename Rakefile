@@ -85,3 +85,9 @@ task :routes do
   command = "bundle exec bin/routes all"
   system(command)
 end
+
+desc "List the Available Scopes"
+task :scopes do
+  command = "bundle exec bin/scopes all"
+  system(command)
+end
