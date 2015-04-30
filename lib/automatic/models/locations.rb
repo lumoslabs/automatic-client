@@ -1,3 +1,5 @@
+require File.expand_path('../location', __FILE__)
+
 module Automatic
   module Models
     class Locations

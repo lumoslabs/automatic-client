@@ -4,6 +4,9 @@ require "automatic/models/polyline"
 
 require "automatic/models/response"
 
+require "automatic/models/devices"
+require "automatic/models/device"
+
 require "automatic/models/trips"
 require "automatic/models/trip"
 
