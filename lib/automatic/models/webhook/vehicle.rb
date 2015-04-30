@@ -8,6 +8,8 @@ module Automatic
         # Vehicle model. Once they are merged we can reference
         # the core models.
         #
+        # @param attributes [Hash]
+        #
         # @return [Automatic::Models::Webhook::Vehicle]
         def initialize(attributes={})
           @attributes = attributes
