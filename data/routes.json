@@ -19,7 +19,7 @@
   },
   {
     "name": "Tag Detail for a Trip",
-    "path": "/trip/{id}/tag/{slug}",
+    "path": "/trip/{id}/tag/{slug}/",
     "rel": "tag-detail-trip",
     "templated": true
   },
