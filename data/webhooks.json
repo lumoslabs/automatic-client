@@ -1,0 +1,34 @@
+[
+  {
+    "name": "trip:finished",
+    "description": "Sent after a trip is completed and processed by Automatic."
+  },
+  {
+    "name": "ignition:on",
+    "description": "Sent when vehicle ignition is turned on."
+  },
+  {
+    "name": "ignition:off",
+    "description": "Sent when vehicle ignition is turned off."
+  },
+  {
+    "name": "notification:speeding",
+    "description": "Sent after a 'velocity exceeded threshold' event occurs."
+  },
+  {
+    "name": "notification:hard_brake",
+    "description": "Sent when a hard baking event occurs."
+  },
+  {
+    "name": "notification:hard_accel",
+    "description": "Sent when a hard acceleration event occurs."
+  },
+  {
+    "name": "mil:on",
+    "description": "Sent when an MIL (check engine light) comes on."
+  },
+  {
+    "name": "mil:off",
+    "description": "Sent when an MIL (check engine light) goes off."
+  }
+]

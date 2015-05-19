@@ -1,0 +1,13 @@
+{
+  "name": "Trip",
+  "description": "Trip API",
+  "renders": [
+    "application/json",
+    "text/html"
+  ],
+  "parses": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "multipart/form-data"
+  ]
+}

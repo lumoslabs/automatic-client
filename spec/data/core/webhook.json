@@ -1,0 +1,4 @@
+{
+  "name": "trip:finished",
+  "description": "Sent after a trip is completed and processed by Automatic."
+}

@@ -1,0 +1,9 @@
+{
+  "name": "1234 South Street",
+  "display_name": "South Street, Somewhere, CA",
+  "street_number": "1234",
+  "street_name": "South Street",
+  "state": "CA",
+  "city": "Somewhere",
+  "country": "US"
+}

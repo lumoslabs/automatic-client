@@ -9,8 +9,58 @@ module Automatic
     class Trips < Thor
       desc 'export', 'Export Automatic Trips to CSV'
       option :filename, type: :string, banner: 'trips-{timestamp}.csv', default: nil
+      option :started_at__lte, type: :string, banner: 'TEST'
+      option :started_at__gte, type: :string
+      option :ended_at__lte, type: :string
+      option :ended_at__gte, type: :string
+      option :limit, type: :numeric, banner: 'Limit of Results to Return'
+      option :page, type: :numeric, banner: 'Page of Results to Return'
+      option :vehicle, type: :string, banner: 'Trips with specified Vehicle'
+      option :paginate, type: :boolean, banner: 'Perform pagination on results', default: true
+
       def export
-        trips = Automatic::Client::Trips.all
+        puts "\n"
+
+        default_options = {
+          :page  => 1,
+          :limit => 50
+        }
+
+        limit = options[:limit]
+        page  = options[:page]
+
+        paginate = options[:paginate]
+        default_options.merge!(paginate: paginate)
+
+        started_at__lte = options[:started_at__lte]
+        started_at__gte = options[:started_at__gte]
+
+        ended_at_lte = options[:ended_at_lte]
+        ended_at_gte = options[:ended_at_gte]
+
+        vehicle = options[:vehicle]
+
+        if limit
+          default_options.merge!(limit: limit)
+        end
+
+        if vehicle
+          default_options.merge!(vehicle: vehicle)
+        end
+
+        if page
+          default_options.merge!(page: page)
+        end
+
+        if started_at__lte
+          default_options.merge!(started_at__lte: Time.parse(started_at__lte).to_i)
+        end
+
+        if started_at__gte
+          default_options.merge!(started_at__gte: Time.parse(started_at__gte).to_i)
+        end
+
+        trips = Automatic::Models::Trips.all(default_options)
 
         if trips.any?
           default_filename = "trips-%s.csv" % [Time.now.utc.to_i]
@@ -18,10 +68,10 @@ module Automatic
           filename = (options[:filename] || default_filename)
 
           trip_row = ->(record) do
-            [record.id, record.vehicle.display_name, record.start_location.lat, record.start_location.lon, record.end_location.lat, record.end_location.lon, record.start_at, record.end_at, record.elapsed_time, record.average_mpg, record.fuel_cost, record.distance_in_miles]
+            [record.id, record.start_location.lat, record.start_location.lon, record.end_location.lat, record.end_location.lon, record.start_at, record.end_at, record.elapsed_time, record.average_mpg, record.fuel_cost, record.distance_in_miles]
           end
 
-          headings = ['ID', 'Vehicle', 'Start Latitude', 'Start Longitude', 'End Latitude', 'End Longitude', 'Start Time', 'End Time', 'Duration', 'Average MPG', 'Fuel Cost', 'Distance']
+          headings = ['ID', 'Start Latitude', 'Start Longitude', 'End Latitude', 'End Longitude', 'Start Time', 'End Time', 'Duration', 'Average MPG', 'Fuel Cost', 'Distance']
 
           CSV.open(filename, "w+") do |csv|
             csv << headings
@@ -38,20 +88,69 @@ module Automatic
       end
 
       desc 'all', 'List all Automatic Trips'
+      option :started_at__lte, type: :string, banner: 'TEST'
+      option :started_at__gte, type: :string
+      option :ended_at__lte, type: :string
+      option :ended_at__gte, type: :string
+      option :limit, type: :numeric, banner: 'Limit of Results to Return'
+      option :page, type: :numeric, banner: 'Page of Results to Return'
+      option :vehicle, type: :string, banner: 'Trips with specified Vehicle'
+      option :paginate, type: :boolean, banner: 'Perform pagination on results', default: true
+
       def all
         puts "\n"
 
-        trips = Automatic::Client::Trips.all
+        default_options = {
+          :page  => 1,
+          :limit => 50
+        }
+
+        limit = options[:limit]
+        page  = options[:page]
+
+        paginate = options[:paginate]
+        default_options.merge!(paginate: paginate)
+
+        started_at__lte = options[:started_at__lte]
+        started_at__gte = options[:started_at__gte]
+
+        ended_at_lte = options[:ended_at_lte]
+        ended_at_gte = options[:ended_at_gte]
+
+        vehicle = options[:vehicle]
+
+        if limit
+          default_options.merge!(limit: limit)
+        end
+
+        if vehicle
+          default_options.merge!(vehicle: vehicle)
+        end
+
+        if page
+          default_options.merge!(page: page)
+        end
+
+        if started_at__lte
+          default_options.merge!(started_at__lte: Time.parse(started_at__lte).to_i)
+        end
+
+        if started_at__gte
+          default_options.merge!(started_at__gte: Time.parse(started_at__gte).to_i)
+        end
+
+        trips = Automatic::Models::Trips.all(default_options)
 
         if trips.any?
-          date_format = "%B %d %Y @ %I:%M%P"
+          date_format = "%B %d %Y @ %I:%M %P"
 
           trip_row = ->(index,record) do
-            [index, record.id, record.vehicle.display_name, record.start_location.name, record.end_location.name, record.start_at.strftime(date_format), record.end_at.strftime(date_format), ("%.2f" % [record.elapsed_time]), ("%.2f" % [record.average_mpg]), ("%.2f" % [record.fuel_cost]), ("%.2f" % [record.distance_in_miles])]
+            duration = Automatic::Utilities::DurationCalculator.new(record.duration)
+            [index, record.id, record.start_address.name[0, 20], record.end_address.name[0, 20], record.start_at.strftime(date_format), record.end_at.strftime(date_format), duration.to_s, ("%.2f" % [record.average_mpg]), ("%.2f" % [record.fuel_cost]), ("%.2f" % [record.distance_in_miles])]
           end
 
           title    = "Automatic Trips"
-          headings = ['#', 'ID', 'Vehicle', 'Start Location', 'End Location', 'Start Time', 'End Time', 'Duration (Minutes)', 'Average MPG', 'Fuel Cost', 'Distance (Miles)']
+          headings = ['#', 'ID', 'Start Address', 'End Address', 'Start Time', 'End Time', 'Duration', 'Average MPG', 'Fuel Cost', 'Distance (Miles)']
           rows     = trips.each_with_index.map { |record, index| trip_row.call((index + 1), record) }
           table    = Terminal::Table.new(title: title, headings: headings, rows: rows)
 

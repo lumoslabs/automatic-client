@@ -1,9 +1,0 @@
-{
-  "uri": "https://api.automatic.com/v1/vehicles/529e5772e4b00a2ddb562f1f",
-  "id": "529e5772e4b00a2ddb562f1f",
-  "year": 2001,
-  "make": "Acura",
-  "model": "MDX",
-  "color": "purple",
-  "display_name": "My Speed Demon"
-}

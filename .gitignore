@@ -17,7 +17,10 @@ test/version_tmp
 tmp
 
 /.env
+/.env.*
 /.rspec
 /.ruby-version
 /.ruby-gemset
 .DS_Store
+
+/log

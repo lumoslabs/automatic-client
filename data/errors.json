@@ -1,0 +1,42 @@
+[
+  {
+    "code": 400,
+    "name": "err_bad_request",
+    "description": "Request is malformed."
+  },
+  {
+    "code": 401,
+    "name": "err_unauthorized",
+    "description": "No token or an invalid token is attached to the request."
+  },
+  {
+    "code": 403,
+    "name": "err_forbidden",
+    "description": "The token attached to the request doesn't have the scope needed to access this endpoint."
+  },
+  {
+    "code": 404,
+    "name": "err_page_not_found",
+    "description": "The token attached to the request doesn't have the scope needed to access this endpoint."
+  },
+  {
+    "code": 406,
+    "name": "err_unknown_error",
+    "description": "Could not satisfy the request Accept header"
+  },
+  {
+    "code": 409,
+    "name": "error_conflict",
+    "description": "Conflict found."
+  },
+  {
+    "code": 422,
+    "name": "err_unprocessable_data",
+    "description": "There is an issue processing the body of the request."
+  },
+  {
+    "code": 500,
+    "name": "err_internal_error",
+    "description": "We have a problem with our server. Please try again later."
+  }
+]
