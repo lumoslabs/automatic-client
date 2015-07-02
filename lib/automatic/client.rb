@@ -20,6 +20,7 @@ require 'automatic/configuration'
 require 'automatic/connection'
 require 'automatic/response'
 require 'automatic/models'
+require 'automatic/api_client'
 
 module Automatic
   module Client
