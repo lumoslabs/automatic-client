@@ -1,3 +1,5 @@
+require 'automatic/models/api_client_methods'
+
 require "automatic/models/error"
 
 require "automatic/models/polyline"

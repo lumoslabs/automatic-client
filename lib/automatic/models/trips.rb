@@ -2,6 +2,7 @@ module Automatic
   module Models
     class Trips
       include Enumerable
+      extend ApiClientMethods
 
       RecordNotFoundError = Class.new(StandardError)
 
@@ -193,10 +194,12 @@ module Automatic
       #
       # @return [Automatic::Models::Trip,Nil]
       def self.find_by_id(id, options={})
+        client = api_client(options)
+
         trip_route = Automatic::Client.routes.route_for('trip')
         trip_url   = trip_route.url_for(id: id)
 
-        request = Automatic::Client.get(trip_url, options)
+        request = client.get(trip_url, options)
 
         if request.success?
           Automatic::Models::Trip.new(request.body)
@@ -218,10 +221,12 @@ module Automatic
                      true
                    end
 
+        client = api_client(options)
+
         trips_route = Automatic::Client.routes.route_for('trips')
         trips_url   = trips_route.url_for
 
-        request = Automatic::Client.get(trips_url, options)
+        request = client.get(trips_url, options)
 
         if request.success?
           raw_trips = []
@@ -233,7 +238,7 @@ module Automatic
 
           if links.next? && paginate
             loop do
-              request = Automatic::Client.get(links.next.uri)
+              request = client.get(links.next.uri)
 
               link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
               links       = link_header.links
