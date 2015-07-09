@@ -2,6 +2,7 @@ module Automatic
   module Models
     class Vehicles
       include Enumerable
+      extend ApiClientMethods
 
       RecordNotFoundError = Class.new(StandardError)
 
@@ -23,10 +24,12 @@ module Automatic
       #
       # @return [Automatic::Models::Vehicle,Nil]
       def self.find_by_id(id, options={})
+        client = api_client(options)
+
         vehicle_route = Automatic::Client.routes.route_for('vehicle')
         vehicle_url   = vehicle_route.url_for(id: id)
 
-        request = Automatic::Client.get(vehicle_url, options)
+        request = client.get(vehicle_url, options)
 
         if request.success?
           Automatic::Models::Vehicle.new(request.body)
@@ -57,10 +60,12 @@ module Automatic
       #
       # @return [Automatic::Models::Vehicles] Automatic Vehicles Model
       def self.all(options={})
+        client = api_client(options)
+
         vehicles_route = Automatic::Client.routes.route_for('vehicles')
         vehicles_url   = vehicles_route.url_for
 
-        request = Automatic::Client.get(vehicles_url, options)
+        request = client.get(vehicles_url, options)
 
         if request.success?
           raw_vehicles = []
@@ -73,7 +78,7 @@ module Automatic
 
           if links.next?
             loop do
-              request = Automatic::Client.get(links.next.uri)
+              request = client.get(links.next.uri)
 
               link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
               links       = link_header.links

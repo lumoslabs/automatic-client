@@ -1,4 +1,5 @@
 require 'automatic/api_client/trips'
+require 'automatic/api_client/vehicles'
 
 module Automatic
   class ApiClient
