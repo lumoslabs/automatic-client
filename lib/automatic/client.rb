@@ -24,6 +24,8 @@ require 'automatic/api_client'
 
 module Automatic
   module Client
+    extend Utilities::ConnectionWrapper
+
     class << self
       attr_accessor :configuration
       attr_accessor :scopes
@@ -47,90 +49,11 @@ module Automatic
       yield(self.configuration)
     end
 
-    # Helper method to build the core Connection to the API
-    # itself.
+    # Returns the configured access token
     #
-    # @return [Automatic::Connection] A Connection delegator to Faraday
-    def self.connection
-      @connection ||= Automatic::Connection.new(url: self.configuration.api_host) do |builder|
-        builder.request(:json)
-        builder.response(:json, content_type: /\bjson$/)
-        builder.response(:logger, self.configuration.request_logger) if self.configuration.request_logger
-        builder.use(FaradayMiddleware::FollowRedirects, limit: 3)
-        builder.use(Automatic::Middleware::Gzip)
-        builder.adapter(Automatic::Connection.default_adapter)
-      end
-
-      # Inject Authorization
-      @connection.headers['Authorization'] = ("Bearer %s" % [self.configuration.access_token])
-
-      # Inject default headers
-      @connection.headers.merge!(self.configuration.connection_options[:headers])
-
-      @connection
-    end
-
-    # Helper method to peform a GET request
-    #
-    # @return [Automatic::Response] Faraday Response Delegator
-    def self.get(url, data={}, headers={})
-      request = self.connection.get(url, data, headers)
-
-      Automatic::Response.new(request)
-    end
-
-    # Helper method to perform a HEAD request
-    #
-    # @return [Automatic::Response] Faraday Response Delegator
-    def self.head(url, data={}, headers={})
-      request = self.connection.head(url, data, headers)
-
-      Automatic::Response.new(request)
-    end
-
-    # Helper method to perform a OPTIONS request
-    #
-    # @return [Automatic::Response] Faraday Response Delegator
-    def self.options(url, headers={})
-      request = self.connection.http_options(url, nil, headers)
-
-      Automatic::Response.new(request)
-    end
-
-    # Helper method to perform a PUT request
-    #
-    # @return [Automatic::Response] Faraday Response Delegator
-    def self.put(url, data={}, headers={})
-      request = self.connection.put(url, data, headers)
-
-      Automatic::Response.new(request)
-    end
-
-    # Helper method to perform a PATCH request
-    #
-    # @return [Automatic::Response] Faraday Response Delegator
-    def self.patch(url, data={}, headers={})
-      request = self.connection.patch(url, data, headers)
-
-      Automatic::Response.new(request)
-    end
-
-    # Helper method to perform a POST request
-    #
-    # @return [Automatic::Response] Faraday Response Delegator
-    def self.post(url, data={}, headers={})
-      request = self.connection.post(url, data, headers)
-
-      Automatic::Response.new(request)
-    end
-
-    # Helper method to perform a DELETE request
-    #
-    # @return [Automatic::Response] Faraday Response Delegator
-    def self.delete(url, data={}, headers={})
-      request = self.connection.delete(url, data, headers)
-
-      Automatic::Response.new(request)
+    # @return [String]
+    def self.access_token
+      self.configuration.access_token
     end
 
     # Returns the defined set of scopes from Automatic
