@@ -2,7 +2,8 @@ module Automatic
   module Models
     class Vehicles
       include Enumerable
-      extend ApiClientMethods
+
+      attr_reader :api_client
 
       RecordNotFoundError = Class.new(StandardError)
 
@@ -13,8 +14,14 @@ module Automatic
       # @param collection [Array] A collection of Automatic Vehicle Definitions
       #
       # @return [Automatic::Models::Vehicles] Instance of the object
-      def initialize(collection)
-        @collection = Array(collection)
+      def initialize(api_client = Automatic::Client)
+        @api_client = api_client
+      end
+
+      def self.method_missing(method_sym, *arguments, &block)
+        super unless method_defined?(method_sym)
+
+        self.new.send(method_sym, *arguments, &block)
       end
 
       # Find a Vehicle by the specified ID
@@ -23,13 +30,11 @@ module Automatic
       # @param options [Hash] HTTP Query String Parameters
       #
       # @return [Automatic::Models::Vehicle,Nil]
-      def self.find_by_id(id, options={})
-        client = api_client(options)
-
+      def find_by_id(id, options={})
         vehicle_route = Automatic::Client.routes.route_for('vehicle')
         vehicle_url   = vehicle_route.url_for(id: id)
 
-        request = client.get(vehicle_url, options)
+        request = api_client.get(vehicle_url, options)
 
         if request.success?
           Automatic::Models::Vehicle.new(request.body)
@@ -46,8 +51,8 @@ module Automatic
       # @raise [RecordNotFoundError] if no Vehicle can be found
       #
       # @return [Automatic::Models::Vehicle,Nil]
-      def self.find_by_id!(id, options={})
-        vehicle = self.find_by_id(id, options)
+      def find_by_id!(id, options={})
+        vehicle = find_by_id(id, options)
 
         raise RecordNotFoundError.new("Could not find Vehicle with ID %s" % [id]) if vehicle.nil?
 
@@ -59,13 +64,16 @@ module Automatic
       # @param options [Hash] Options to send to the HTTP Request
       #
       # @return [Automatic::Models::Vehicles] Automatic Vehicles Model
-      def self.all(options={})
-        client = api_client(options)
+      def all(options={})
+        @collection = collect_all(options)
+        self
+      end
 
+      def collect_all(options = {})
         vehicles_route = Automatic::Client.routes.route_for('vehicles')
         vehicles_url   = vehicles_route.url_for
 
-        request = client.get(vehicles_url, options)
+        request = api_client.get(vehicles_url, options)
 
         if request.success?
           raw_vehicles = []
@@ -78,7 +86,7 @@ module Automatic
 
           if links.next?
             loop do
-              request = client.get(links.next.uri)
+              request = api_client.get(links.next.uri)
 
               link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
               links       = link_header.links
@@ -89,7 +97,7 @@ module Automatic
             end
           end
 
-          self.new(raw_vehicles)
+          raw_vehicles
         else
           raise StandardError.new(request.body)
         end
@@ -104,7 +112,7 @@ module Automatic
 
       private
       def vehicles_collection
-        @collection.map { |record| Vehicle.new(record) }
+        (@collection || collect_all).map { |record| Vehicle.new(record) }
       end
     end
   end

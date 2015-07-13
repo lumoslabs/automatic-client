@@ -21,8 +21,6 @@ require 'automatic/connection'
 require 'automatic/response'
 require 'automatic/models'
 require 'automatic/api_client'
-require 'automatic/api_client/client_delegator'
-require 'automatic/api_client_methods'
 
 module Automatic
   module Client

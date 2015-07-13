@@ -2,7 +2,8 @@ module Automatic
   module Models
     class Trips
       include Enumerable
-      extend ApiClientMethods
+
+      attr_reader :api_client
 
       RecordNotFoundError = Class.new(StandardError)
 
@@ -13,8 +14,14 @@ module Automatic
       # @param collection [Array] A collection of Automatic Trip Definitions
       #
       # @return [Automatic::Models::Trips] Instance of the object
-      def initialize(collection={})
-        @collection = Array(collection)
+      def initialize(api_client = Automatic::Client)
+        @api_client = api_client
+      end
+
+      def self.method_missing(method_sym, *arguments, &block)
+        super unless method_defined?(method_sym)
+
+        self.new.send(method_sym, *arguments, &block)
       end
 
       # Return all trips taken today
@@ -22,10 +29,10 @@ module Automatic
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.today(options={})
+      def today(options={})
         today = Time.now
 
-        self.between(today.beginning_of_day.to_i, today.end_of_day.to_i, options)
+        between(today.beginning_of_day.to_i, today.end_of_day.to_i, options)
       end
 
       # Return all trips taken yesterday
@@ -36,10 +43,10 @@ module Automatic
       # provide quick access to specific sets of trips.
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.yesterday(options={})
+      def yesterday(options={})
         yesterday = Time.now.yesterday
 
-        self.between(yesterday.beginning_of_day.to_i, yesterday.end_of_day.to_i, options)
+        between(yesterday.beginning_of_day.to_i, yesterday.end_of_day.to_i, options)
       end
 
       # Return all trips for this week
@@ -47,24 +54,24 @@ module Automatic
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.this_week(options={})
+      def this_week(options={})
         today     = Time.now
         this_week = today.beginning_of_week
 
-        self.between(this_week.beginning_of_day.to_i, today.end_of_day.to_i, options)
+        between(this_week.beginning_of_day.to_i, today.end_of_day.to_i, options)
       end
-      class << self; alias :this_week_to_date :this_week; end
+      alias :this_week_to_date :this_week
 
       # Return all trips for last week
       #
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.last_week(options={})
+      def last_week(options={})
         today     = Time.now
         last_week = today.last_week
 
-        self.between(last_week.beginning_of_week.to_i, last_week.end_of_week.to_i, options)
+        between(last_week.beginning_of_week.to_i, last_week.end_of_week.to_i, options)
       end
 
       # Return all trips for last week to current date
@@ -72,11 +79,11 @@ module Automatic
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.last_week_to_date(options={})
+      def last_week_to_date(options={})
         today     = Time.now
         last_week = today.last_week
 
-        self.between(last_week.beginning_of_week.to_i, (today - 1.week).to_i, options)
+        between(last_week.beginning_of_week.to_i, (today - 1.week).to_i, options)
       end
 
       # Return all trips for this month
@@ -84,24 +91,24 @@ module Automatic
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.this_month(options={})
+      def this_month(options={})
         today      = Time.now
         this_month = today.beginning_of_month
 
-        self.between(this_month.beginning_of_day.to_i, today.end_of_day.to_i, options)
+        between(this_month.beginning_of_day.to_i, today.end_of_day.to_i, options)
       end
-      class << self; alias :this_month_to_date :this_month; end
+      alias :this_month_to_date :this_month
 
       # Return all trips for last month
       #
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.last_month(options={})
+      def last_month(options={})
         today      = Time.now
         last_month = today.last_month
 
-        self.between(last_month.beginning_of_month.to_i, last_month.end_of_month.to_i, options)
+        between(last_month.beginning_of_month.to_i, last_month.end_of_month.to_i, options)
       end
 
       # Return all trips for last month to date
@@ -109,11 +116,11 @@ module Automatic
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.last_month_to_date(options={})
+      def last_month_to_date(options={})
         today      = Time.now
         last_month = today.last_month
 
-        self.between(last_month.beginning_of_month.to_i, last_month.to_i, options)
+        between(last_month.beginning_of_month.to_i, last_month.to_i, options)
       end
 
       # Return all trips for this year
@@ -121,24 +128,24 @@ module Automatic
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.this_year(options={})
+      def this_year(options={})
         today     = Time.now
         this_year = today.beginning_of_year
 
-        self.between(this_year.to_i, today.end_of_day.to_i, options)
+        between(this_year.to_i, today.end_of_day.to_i, options)
       end
-      class << self; alias :this_year_to_date :this_year; end
+      alias :this_year_to_date :this_year
 
       # Return all trips for last year
       #
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.last_year(options={})
+      def last_year(options={})
         today     = Time.now
         last_year = today.last_year
 
-        self.between(last_year.beginning_of_year.to_i, last_year.end_of_year.to_i, options)
+        between(last_year.beginning_of_year.to_i, last_year.end_of_year.to_i, options)
       end
 
       # Return all trips for last year to date
@@ -146,11 +153,11 @@ module Automatic
       # @param options [Hash] HTTP request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.last_year_to_date(options={})
+      def last_year_to_date(options={})
         today     = Time.now
         last_year = today.last_year
 
-        self.between(last_year.beginning_of_year.to_i, last_year.to_i, options)
+        between(last_year.beginning_of_year.to_i, last_year.to_i, options)
       end
 
       # Core helper method to get trips between time range
@@ -160,7 +167,7 @@ module Automatic
       # @param options [Hash] Additional Request options
       #
       # @return [Automatic::Models::Trips] Automatic Trips Model
-      def self.between(start_timestamp, end_timestamp, options={})
+      def between(start_timestamp, end_timestamp, options={})
         request_params = {
           :started_at__gte => start_timestamp.to_i,
           :started_at__lte => end_timestamp.to_i
@@ -168,7 +175,7 @@ module Automatic
 
         request_options = options.merge!(request_params)
 
-        self.all(request_options)
+        all(request_options)
       end
 
       # Find a Trip by the specified ID
@@ -179,8 +186,8 @@ module Automatic
       # @raise [RecordNotFoundError] if no Trip can be found
       #
       # @return [Automatic::Models::Trip] Automatic Trip Model
-      def self.find_by_id!(id, options={})
-        trip = self.find_by_id(id, options)
+      def find_by_id!(id, options={})
+        trip = find_by_id(id, options)
 
         raise RecordNotFoundError.new("Could not find Trip with ID %s" % [id]) if trip.nil?
 
@@ -193,13 +200,11 @@ module Automatic
       # @param options [Hash] HTTP Query String Parameters
       #
       # @return [Automatic::Models::Trip,Nil]
-      def self.find_by_id(id, options={})
-        client = api_client(options)
-
+      def find_by_id(id, options={})
         trip_route = Automatic::Client.routes.route_for('trip')
         trip_url   = trip_route.url_for(id: id)
 
-        request = client.get(trip_url, options)
+        request = api_client.get(trip_url, options)
 
         if request.success?
           Automatic::Models::Trip.new(request.body)
@@ -214,19 +219,22 @@ module Automatic
       # @param options [Hash] Options to send to the HTTP request.
       #
       # @return [Automatic::Model::Trips] Automatic Trips Model
-      def self.all(options={})
+      def all(options={})
+        @collection = collect_all(options)
+        self
+      end
+
+      def collect_all(options = {})
         paginate = if options.has_key?(:paginate)
                      options.delete(:paginate)
                    else
                      true
                    end
 
-        client = api_client(options)
-
         trips_route = Automatic::Client.routes.route_for('trips')
         trips_url   = trips_route.url_for
 
-        request = client.get(trips_url, options)
+        request = api_client.get(trips_url, options)
 
         if request.success?
           raw_trips = []
@@ -238,7 +246,7 @@ module Automatic
 
           if links.next? && paginate
             loop do
-              request = client.get(links.next.uri)
+              request = api_client.get(links.next.uri)
 
               link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
               links       = link_header.links
@@ -249,7 +257,7 @@ module Automatic
             end
           end
 
-          self.new(raw_trips)
+          raw_trips
         else
           raise StandardError.new(request.body)
         end
@@ -416,7 +424,7 @@ module Automatic
 
       private
       def internal_collection
-        @collection.map { |record| Trip.new(record) }
+        (@collection || collect_all).map { |record| Trip.new(record) }
       end
     end
   end

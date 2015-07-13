@@ -1,7 +1,7 @@
 module Automatic
   class ApiClient
     def trips
-      ClientDelegator.new(self, Models::Trips)
+      @trips ||= Models::Trips.new(self)
     end
   end
 end

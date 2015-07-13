@@ -1,7 +1,7 @@
 module Automatic
   class ApiClient
     def vehicles
-      ClientDelegator.new(self, Models::Vehicles)
+      @vehicles ||= Models::Vehicles.new(self)
     end
   end
 end
