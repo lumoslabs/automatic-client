@@ -1,28 +1,9 @@
+require 'automatic/models/trip'
+
 module Automatic
   module Models
-    class Trips
-      include Enumerable
-
-      attr_reader :api_client
-
-      RecordNotFoundError = Class.new(StandardError)
-
-      # Creates a new instance of the Trips Collection. This is
-      # used to wrap the trips and allow extra support for finders,
-      # sorting, and grouping
-      #
-      # @param collection [Array] A collection of Automatic Trip Definitions
-      #
-      # @return [Automatic::Models::Trips] Instance of the object
-      def initialize(api_client = Automatic::Client)
-        @api_client = api_client
-      end
-
-      def self.method_missing(method_sym, *arguments, &block)
-        super unless method_defined?(method_sym)
-
-        self.new.send(method_sym, *arguments, &block)
-      end
+    class Trips < Models
+      INDIVIDUAL_MODEL = Trip
 
       # Return all trips taken today
       #
@@ -178,98 +159,6 @@ module Automatic
         all(request_options)
       end
 
-      # Find a Trip by the specified ID
-      #
-      # @param id [String] The Automatic Trip ID
-      # @param options [Hash] HTTP Query String Parameters
-      #
-      # @raise [RecordNotFoundError] if no Trip can be found
-      #
-      # @return [Automatic::Models::Trip] Automatic Trip Model
-      def find_by_id!(id, options={})
-        trip = find_by_id(id, options)
-
-        raise RecordNotFoundError.new("Could not find Trip with ID %s" % [id]) if trip.nil?
-
-        trip
-      end
-
-      # Find a Trip by the specified ID
-      #
-      # @param id [String] The Automatic Trip ID
-      # @param options [Hash] HTTP Query String Parameters
-      #
-      # @return [Automatic::Models::Trip,Nil]
-      def find_by_id(id, options={})
-        trip_route = Automatic::Client.routes.route_for('trip')
-        trip_url   = trip_route.url_for(id: id)
-
-        request = api_client.get(trip_url, options)
-
-        if request.success?
-          Automatic::Models::Trip.new(request.body)
-        else
-          nil
-        end
-      end
-
-      # Make a connection to Automatic to retrieve all trips. By default
-      # we will stream until we have all trips. You can set `per_page` and `page` in the request.
-      #
-      # @param options [Hash] Options to send to the HTTP request.
-      #
-      # @return [Automatic::Model::Trips] Automatic Trips Model
-      def all(options={})
-        @collection = collect_all(options)
-        self
-      end
-
-      def collect_all(options = {})
-        paginate = if options.has_key?(:paginate)
-                     options.delete(:paginate)
-                   else
-                     true
-                   end
-
-        trips_route = Automatic::Client.routes.route_for('trips')
-        trips_url   = trips_route.url_for
-
-        request = api_client.get(trips_url, options)
-
-        if request.success?
-          raw_trips = []
-
-          link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
-          links       = link_header.links
-
-          raw_trips.concat(request.body.fetch('results', []))
-
-          if links.next? && paginate
-            loop do
-              request = api_client.get(links.next.uri)
-
-              link_header = Automatic::Models::Response::LinkHeader.new(request.headers['Link'])
-              links       = link_header.links
-
-              raw_trips.concat(request.body.fetch('results', []))
-
-              break unless links.next?
-            end
-          end
-
-          raw_trips
-        else
-          raise StandardError.new(request.body)
-        end
-      end
-
-      # Method needed for Enumerable support
-      #
-      # @return [Array, Trips] A collection of Trip objects
-      def each(&block)
-        internal_collection.each(&block)
-      end
-
       # Out of this collection, find all trips with a Tagging
       # of business
       #
@@ -421,11 +310,6 @@ module Automatic
         end
       end
       # -- STATISTICS
-
-      private
-      def internal_collection
-        (@collection || collect_all).map { |record| Trip.new(record) }
-      end
     end
   end
 end

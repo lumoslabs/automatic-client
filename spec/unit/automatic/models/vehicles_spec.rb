@@ -11,7 +11,7 @@ describe Automatic::Models::Vehicles do
 
   let(:collection) { [vehicle] }
 
-  before { allow_any_instance_of(described_class).to receive(:collect_all) { collection }  }
+  before { allow_any_instance_of(described_class).to receive(:query) { collection }  }
 
   subject { described_class.new }
 
