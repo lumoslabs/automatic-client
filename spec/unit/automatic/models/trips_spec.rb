@@ -13,7 +13,9 @@ describe Automatic::Models::Trips do
     [trip]
   end
 
-  subject { described_class.new(collection) }
+  before { allow_any_instance_of(described_class).to receive(:query) { collection }  }
+
+  subject { described_class.new }
 
 
   context "with no records" do
